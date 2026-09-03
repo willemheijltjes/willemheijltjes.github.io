@@ -1,0 +1,47 @@
+<!--I'm going to make this a level where the teddy is dragged to Frege -->
+<!--We then need another level where we have both Frege and the teddy bear. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 20</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+    <script src="../FOL.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="..\shared.js"></script>
+
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('#level1Modal').modal('show');
+        });
+    </script>
+</head>
+<body>
+<div class="modal fade" id="level1Modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <p>The next symbol we can use is ∀. ∀ means 'for all'.
+                </p>
+                <p>  ∀x.Sad(x) means that every object in the scene is sad.
+
+                    </p>
+                <p>
+                    If Aristotle is in the scene, then this is not true because bears cannot be sad.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="Level21.html" class="btn btn-primary">Go to next level</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

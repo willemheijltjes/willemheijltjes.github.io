@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src=script.js></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<style>
+			canvas {
+			    border:1px solid #d3d3d3;
+			    background-color: #FFFFFF;
+			    padding-left: 0;
+			    padding-right: 0;
+			    margin-left: auto;
+			    margin-right: auto;
+			    display: block;
+			}
+
+			body {
+				background-color: #D7F2C3;
+			}
+
+			#response-times {
+				text-align: center;
+				width: 300px;
+				height: 100px;
+			}
+			.responses {
+				width: 600px;
+				margin: auto;
+				padding-top: 10px;
+			}
+			.response-element {
+				padding-bottom: 10px;
+				width: fit-content;
+				margin: auto;
+			}
+		</style>
+	</head>
+
+	<body onload="startGame()">
+		<div style="width: 800px; margin-left: auto; margin-right: auto;">
+			<p>Instructions: Drag the blocks and place them as arguments into the other blocks (arugments are grey boxes) to recreate the function described. When you have a solution, drag the block into the bottom box and your solution will be checked.</p>
+		</div>
+		<img id="refresh" width="50" height="50" style="display: none;" src="refresh.png">
+		<img id="hint" width="50" height="50" style="display: none;" src="hint.png">
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+
+    <script src="../FOL.js" type="text/javascript"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="..\shared.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../Levels.css" media="screen">
+    <title>Level 6</title>
+
+    <script type="text/javascript">
+        $(window).load(function(){
+            $('#level1Modal').modal('show');
+        });
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        let context = [];
+        let sentence1 = {type:"predicate", formula:"Has", args:["Frege","HasIdea"]};
+		let sentence2 = {type:"predicate", formula:"HasIdea", args:["Frege"]};
+        let sentence3={type:"binary", formula:"OR", pred1:sentence1, pred2:sentence2};
+        let sentences = [sentence3];
+        let counter=0;
+        let russellEmotion;
+        let fregeStuff;
+        function makeContext(){
+            context = [];
+            let russellEmotionBox = document.getElementById("russellEmotion").firstElementChild;
+            russellEmotion = russellEmotionBox ? russellEmotionBox.className : false;
+            let fregeStuffBox = document.getElementById("fregeStuff").firstElementChild;
+            fregeStuff = fregeStuffBox ? fregeStuffBox.className : false;
+
+            if (russellEmotion){
+                context.push(russellEmotion+"(Frege )");
+			}
+            if (fregeStuff){
+                context.push("Has(Frege "+fregeStuff+" )");
+            }
+
+            let output = true;
+
+            $( sentences ).each(function() {
+                let sentence=$(this)[0];
+                if (!eval(context, sentence)){
+                    output = false;
+                }
+            });
+            if(output){
+                triggerNextLevelDialogue();
+            }
+            else{
+                triggerTryAgainDialogue();
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+<div class="modal fade" id="singleHelp" tabindex="-1" role="dialog" aria-labelledby="singleHelp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+                <p>Select one of the symbols from the bottom and drag it to the thought bubble.</p>
+                <img src="../images/help1.png">
+                <p>If you make a mistake, double click an item to delete it and then try again.</p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="level1Modal"  data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Frege's teddy bear is an object with the name 'Aristotle' and the property that it is brown.
+                </p>
+                <p>
+                    So we can write <strong>Brown(Aristotle)</strong>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Next</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal2"  data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Objects are not always physical objects. Frege's idea is still an object, which is why we
+                    can write Has(Frege, Idea).
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="Level7.html" class="btn btn-primary">Go to next level!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tryAgainDialogue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Bad luck!</h4>
+            </div>
+            <div class="modal-body">
+                <p>You haven't got every sentence true yet.</p>
+                <p>Drag the light bulb into Frege's belongings.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Try again.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

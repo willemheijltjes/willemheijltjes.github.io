@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+    <script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.2.9/jsplumb.js"></script>
+    <script src="..\shared.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../Levels.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../2Item.css" media="screen">
+
+    <title>Level 3</title>
+    <script src="..\FOL.js" type="text/javascript"></script>
+
+    <script src="..\Level3.js" type="text/javascript"></script>
+</head>
+<div class="alert alert-danger alert-dismissible collapse" id="unaryAlert" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Oops!</strong> That box is for predicates that describe one thing.
+    <p>Remember that Likes() and IsAngryWith() talk about two people</p>
+
+</div>
+<div class="alert alert-danger alert-dismissible collapse" id="binaryAlert" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Oops!</strong> <p>That box is for predicates that describe two things.</p>
+    <p>Things like Happy() and Logician() can only talk about one thing at a time</p>
+</div>
+<div class="modal fade" id="doubleHelp" tabindex="-1" role="dialog" aria-labelledby="singleHelp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+                <p>Drag the arrow by clicking the box in the middle</p>
+                <img src="../images/help2.png" width="50%" height="50%" style="border: 1pt solid black">
+                <p>You will see a green outline when it is in the right place.</p>
+                <img src="../images/help3.png" width="50%" height="50%" style="border: 1pt solid black">
+                <p>Remember that if you make a mistake, you can delete things by double clicking them.</p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="instructionModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <p>Frege has a teddy bear named after one of the most famous logicians in history - Aristotle.</p>
+                <p>We can talk about this using a <strong>relation</strong>.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Next</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    A relation talks about how two objects relate to each other.
+                </p>
+                <p>
+                    Drag the arrow up to between Frege and Aristotle, and add an emotion.
+                </p>
+				<p>
+                    Remember, if you make a mistake, double click a symbol to delete it.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="nextLevelDialogue" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Congratulations</h4>
+            </div>
+            <div class="modal-body">
+                <p>You made the sentence true</p>
+            </div>
+            <div class="modal-footer">
+                <a href="Level4.html" class="btn btn-primary">Go to next level</a>                </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="tryAgainDialogue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Bad luck!</h4>
+            </div>
+            <div class="modal-body">
+                <p>You haven't got every sentence true yet.</p>
+                <p>Drag the arrow from Frege to the teddy bear</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Try again.</button>
+            </div>
+        </div>
+    </div>
+</div>
+<body>
+<div class = "container-fluid">
+    <div class="row">
+
+        <div class="col-md-12" style="text-align:center">
+
+            <h2>Likes(Frege, Aristotle)</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-9">
+            <div class="holder">
+
+                <div class="box receiverBox" id="russellEmotion" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                <img src="../images/frege.png" id="russell">
+
+                <div class="box receiverBox arrowBox topArrowBox" width="400" height="200" ondrop="dropArrow(event)" ondragover="allowDrop(event)" ondragenter="addBorder(event)" ondragleave="removeBorder(event)" id="arrowBox"></div>
+                
+
+                <img src="../images/aristotle.png" onclick="this.src='../images/aristotle.png'" id="frege">
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-9" style="margin-left:50px">
+            <button class="btn btn-success" id="contextMaker" onclick="makeContext()">Check.</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#instructionModal">
+                Instructions
+            </button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#doubleHelp">Help</button>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-3">
+
+        </div>
+        <div class="col-xs-3">
+            <div class="box startBox" id="heartStart" ondrop="dropB(event)" ondragover="allowDrop(event)">
+                <img class="Likes" src="../images/heart.png" draggable="true" ondragstart="drag(event)" id="Likes" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Likes()">
+            </div>
+            <div class="box startBox" id="lightningStart" ondrop="dropB(event)" ondragover="allowDrop(event)">
+                <img class="IsAngryWith" src="../images/lightning.png" draggable="true" ondragstart="drag(event)" id="IsAngryWith" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="IsAngryWith()">
+            </div>
+        </div>
+        <div class="col-xs-3">
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-4">
+            <div class="startArrowBox" id="startArrowBox" draggable="true" ondragstart="drag(event)" id="topArrow" width="500" height="100" >
+
+                <div class="topArrow">
+                    <div class="box1 receiverBox" id="russellFrege" ondrop="dropB(event)" ondragover="allowDrop(event)" data-toggle="tooltip" data-placement="top" title="Frege's feelings towards Aristotle">
+                        <img class="Likes" src="../images/heart.png" draggable="true" ondragstart="drag(event)" id="Likes1" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Likes()">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+</html>

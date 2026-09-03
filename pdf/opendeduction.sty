@@ -1,0 +1,279 @@
+%      +--------------------- opendeduction.sty ---------------------+
+%      |                                                             |
+%      | A LaTeX macro for typesetting derivations in open deduction |
+%      |                                                             |
+%      | Author:   Willem Heijltjes                                  |
+%      | Version:  2                                                 |
+%      | Date:     17 July 2018                                      |
+%      |                                                             |
+%      +-------------------------------------------------------------+
+
+\ProvidesPackage{opendeduction}
+
+\RequirePackage{adjustbox}
+\RequirePackage{pgfkeys}
+\RequirePackage{xcolor}
+
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+
+% ========== DERIVATIONS ==========
+
+\newbox\od@return
+\newbox\od@formula
+\newbox\od@rule
+\newbox\od@llabel
+\newbox\od@rlabel
+
+\newif\ifod@llabel
+\newif\ifod@rlabel
+
+\newcount\od@ruletype
+
+\newdimen\od@width
+\newdimen\od@height
+\newdimen\od@rulewidth
+\newdimen\od@lwidth
+\newdimen\od@rwidth
+\newdimen\od@maxlwidth
+\newdimen\od@maxrwidth
+
+\newif\ifod@text
+\newif\ifod@border
+\newif\ifod@background
+
+\def\od@resetcolors{%
+  \od@textfalse%
+  \od@borderfalse%
+  \od@backgroundfalse%
+  \def\od@braces{}%
+}
+
+\od@resetcolors
+
+\pgfkeys{
+  /od/.is family,
+  /od/.cd,
+  text/.value required,
+  border/.value required,
+  background/.value required,
+  text/.code       = {\od@texttrue\edef\od@textcolor{#1}},
+  border/.code     = {\od@bordertrue\edef\od@bordercolor{#1}},
+  background/.code = {\od@backgroundtrue\edef\od@backgroundcolor{#1}},
+  braces/.is choice,
+  braces/.default     = square,
+  braces/curly/.code  = {\def\od@braces{\od@curly}},
+  braces/round/.code  = {\def\od@braces{\od@round}},
+  braces/square/.code = {\def\od@braces{\od@square}},
+  .unknown/.code   = {\pgfqkeys{/od}{border=\pgfkeyscurrentname,/od/background=\pgfkeyscurrentname!10}},
+}
+
+\newcommand\od@curly[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand\od@round[1]{\ensuremath{\left(#1\right)}}
+\newcommand\od@square[1]{\ensuremath{\left[#1\right]}}
+
+\newcommand\drv[2][]{%
+  \od@resetcolors%
+  \pgfkeys{/od/.cd,#1}%
+  \ifod@border%
+    \ifod@background%
+      \adjustbox{cfbox={\od@bordercolor} .6pt , bgcolor=\od@backgroundcolor}{%
+      	\od@drv@braces{#2}%
+	  }%
+    \else%
+      \adjustbox{cfbox={\od@bordercolor} .6pt}{%
+      	\od@drv@braces{#2}%
+	  }%
+    \fi%
+  \else%
+    \ifod@background%
+      \adjustbox{cfbox={\od@backgroundcolor} .6pt , bgcolor=\od@backgroundcolor}{%
+      	\od@drv@braces{#2}%
+	  }%
+    \else%
+	  {%
+      	\od@drv@braces{#2}%
+	  }%
+    \fi%
+  \fi%
+}
+
+\newcommand\od@drv@braces[1]{%
+   {\ifod@text\color{\od@textcolor}\fi%
+	\od@braces{\od@drv{#1}}}%
+}
+
+\newcommand\od@drv[1]{\ensuremath{\vcenter{\od@drv@init#1;\relax}}}
+
+\def\od@drv@init#1;{%
+  \setbox\od@return=\hbox{$#1$}%
+  \od@width=\wd\od@return%
+  \od@maxlwidth=.5\od@width%
+  \od@maxrwidth=.5\od@width%
+  \od@rulewidth=\wd\od@return%
+  \@ifnextchar\relax{\box\od@return}{\od@drv@findllabel}%
+}
+\def\od@drv@findllabel{%
+  \@ifnextchar[{\od@llabeltrue\od@drv@getllabel}{\od@llabelfalse\od@drv@findrule}%
+}
+\def\od@drv@getllabel[#1]{%
+  \setbox\od@llabel=\hbox{\raisebox{-0.3ex}{\smash{$\scriptstyle{#1}$}\kern2pt}}%
+  \od@drv@findrule%
+}
+\def\od@drv@findrule{%
+  \@ifnextchar-{\od@ruletype=1\od@drv@findrlabel}{%
+  \@ifnextchar={\od@ruletype=2\od@drv@findrlabel}{%
+  \@ifnextchar.{\od@ruletype=3\od@drv@findrlabel}{%
+  \@ifnextchar|{\od@ruletype=4\od@drv@findrlabel}{%
+  \@ifnextchar_{\od@ruletype=5\od@drv@findrlabel}{%
+  \@ifnextchar^{\od@ruletype=6\od@drv@findrlabel}{%
+  				\od@ruletype=0\od@drv@findrlabel}%
+  }}}}}%
+}
+\def\od@drv@findrlabel@find#1{%
+  \ifx#1;\od@rlabelfalse\let\od@drv@findrlabel@next\relax\fi%
+  \ifx#1[\od@rlabeltrue\let\od@drv@findrlabel@next\od@drv@findrlabel@end\fi%
+  \od@drv@findrlabel@next%
+}
+\def\od@drv@findrlabel@end#1{%
+  \ifx#1;\let\od@drv@findrlabel@next\relax\fi%
+  \od@drv@findrlabel@next%
+}
+\def\od@drv@findrlabel#1;{%
+  \let\od@drv@findrlabel@next\od@drv@findrlabel@find%
+  \od@drv@findrlabel@next#1;%
+  \ifod@rlabel%
+    \od@drv@getrlabel#1;%
+  \else%
+    \ifcase\od@ruletype%
+      \setbox\od@rule=\hbox{$#1$}%
+    \fi%
+  \fi%
+  \od@drv@main%
+}
+\def\od@drv@getrlabel#1[#2]#3;{%
+  \ifcase\od@ruletype%
+    \setbox\od@rule=\hbox{$#1$}%
+  \fi%
+  \setbox\od@rlabel=\hbox{\smash{\raisebox{-0.3ex}{\kern2pt$\scriptstyle{#2}$}}}%
+}
+\def\od@align#1{\leavevmode\vtop{\baselineskip0pt\lineskip2pt\ialign{##\crcr#1\crcr}}}
+\def\od@drv@main#1;{%
+  \setbox\od@formula=\hbox{$#1$}%
+  %
+  \od@rulewidth=\od@max{\od@rulewidth}{\wd\od@formula}%
+  %
+  \ifcase\od@ruletype%
+    \or \setbox\od@rule=\hbox{\vrule height .6pt depth .0pt width \od@rulewidth}%
+    \or \setbox\od@rule=\hbox{%
+    		\rlap{\vrule height 1.2pt depth -.6pt width \od@rulewidth}%
+      		      \vrule height -.6pt depth 1.2pt width \od@rulewidth}%
+	\or \setbox\od@rule=\hbox{\od@dash\od@rulewidth}%
+	\or \setbox\od@rule=\hbox{%
+			\vrule height 8pt depth 7pt width .6pt \kern1.5pt%
+			\vrule height 8pt depth 7pt width .6pt}%
+	\or \setbox\od@rule=\hbox{\od@Longdownarrow}%
+	\or \setbox\od@rule=\hbox{\od@Longuparrow}%
+  \fi%
+  %
+  \od@rulewidth=\wd\od@formula%
+  %
+  \od@width=\wd\od@rule%
+  \od@lwidth=\ifod@llabel\wd\od@llabel\else0pt\fi%
+  \od@rwidth=\ifod@rlabel\wd\od@rlabel\else0pt\fi%
+  \advance\od@lwidth by .5\od@width%
+  \advance\od@rwidth by .5\od@width%
+  \od@maxlwidth=\od@max{\od@maxlwidth}{\od@lwidth}%
+  \od@maxrwidth=\od@max{\od@maxrwidth}{\od@rwidth}%
+  %
+  \od@width=\wd\od@formula%
+  \od@maxlwidth=\od@max{\od@maxlwidth}{.5\od@width}%
+  \od@maxrwidth=\od@max{\od@maxrwidth}{.5\od@width}%
+  %
+  \setbox\od@return=\hbox{\od@align{%
+      \hfil\box\od@return\hfil%
+    \cr%
+      \hfil%
+      \ifod@llabel\llap{\box\od@llabel}\fi%
+      \box\od@rule%
+      \ifod@rlabel\rlap{\box\od@rlabel}\fi%
+      \hfil%
+    \cr%
+      \hfil\box\od@formula\hfil%
+  }}%
+  %
+  \@ifnextchar\relax{%
+    \od@width=\wd\od@return%
+    \advance\od@maxlwidth by -.5\od@width%
+    \advance\od@maxrwidth by -.5\od@width%
+    \hbox{%
+      \kern\od@maxlwidth%
+      \box\od@return%
+      \kern\od@maxrwidth%
+    }%
+  }{\od@drv@findllabel}%
+}
+
+
+% ========= DASHED RULES ==========
+% 
+% Attempts to fit a dashed rule into a fixed width (w), with:
+% - dashes touching both ends,
+% - at least three dashes,
+% - gaps as wide as possible up to dash length.
+% 
+% Given a (maximum) dash length specified in \od@dashlength,
+% and gaps of equal length to dashes, if:
+% - At most 3 dashes fit: the pattern (- - -) is squeezed
+% - At most 4 dashes fit: the pattern (- - - -) is squeezed
+% - At most n dashes fit: n dashes used and gaps are squeezed
+
+%\newcommand\dash\od@dash
+
+\newdimen\od@dashlength
+\newdimen\od@dashrulewidth
+
+\od@dashlength=3pt
+
+\def\od@dash#1{%
+  \od@dashrulewidth=#1%
+  \hbox to \od@dashrulewidth{%
+    \ifdim\od@dashrulewidth<5\od@dashlength\od@threedash\else%
+    \ifdim\od@dashrulewidth<7\od@dashlength\od@fourdash\else%
+    \od@ndash\fi\fi%
+}}
+\def\od@threedash{%
+  \divide\od@dashrulewidth by 5%
+  \vrule height .6pt width \od@dashrulewidth\hfil%
+  \vrule height .6pt width \od@dashrulewidth\hfil%
+  \vrule height .6pt width \od@dashrulewidth%
+}
+\def\od@fourdash{%
+  \divide\od@dashrulewidth by 7%
+  \vrule height .6pt width \od@dashrulewidth\hfil%
+  \vrule height .6pt width \od@dashrulewidth\hfil%
+  \vrule height .6pt width \od@dashrulewidth\hfil%
+  \vrule height .6pt width \od@dashrulewidth%
+}
+\def\od@ndash{%
+  \vrule height .6pt width \od@dashlength\hfil%
+  \advance\od@dashrulewidth by -2\od@dashlength%
+  \ifdim\od@dashrulewidth<\od@dashlength%
+    \vrule height .6pt width \od@dashlength%
+  \else\expandafter%
+    \od@ndash%
+  \fi%
+}
+
+
+% ========== ARROW DERIVATIONS ========== 
+
+\newcommand\od@Longdownarrow{\kern-2pt\raisebox{-3pt}{${\left\Downarrow\vbox to 12pt{}\right.}\kern-\nulldelimiterspace$}\kern-2pt}
+\newcommand\od@Longuparrow{\kern-2pt\raisebox{0pt}{${\left\Uparrow\vbox to 12pt{}\right.}\kern-\nulldelimiterspace$}\kern-2pt}
+
+% ========== AUXILIARY ==========
+
+\newcommand\od@max[2]{\ifdim#1>#2#1\else#2\fi}
+
+

@@ -1,0 +1,2444 @@
+<html>
+<head>
+</head>
+<body>
+<canvas id="myCanvas" width="800" height="550" style="margin:0;padding:0;"></canvas>
+<audio src="assets/tune.mp3" autostart="false" id="sound"></audio>
+
+<script type="text/javascript" language="javascript">
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var sound = document.getElementById('sound');
+var levelCount = 0;
+var drawlevels = [drawstart,draw1,draw2,draw3,draw4,draw5,draw6,draw7,draw8,draw9,draw10,draw11,
+					draw12,draw13,draw14,draw15,drawend];
+var leveldata = [startdata,level1,level2,level3,level4,level5,level6,level7,level8,level9,level10,
+					level11,level12,level13,level14,level15];
+var rand1 = [draw1a,draw1b,draw1c,draw1d,draw1e];
+var rand2 = [draw2a,draw2b,draw2c,draw2d,draw2e];
+var rand3 = [draw3a,draw3b,draw3c,draw3d,draw3e];
+var rand4 = [draw4a,draw4b,draw4c,draw4d,draw4e];
+var rand5 = [draw5a,draw5b,draw5c,draw5d,draw5e];
+var rand6 = [draw6a,draw6b,draw6c,draw6d,draw6e];
+var rand7 = [draw7a,draw7b,draw7c,draw7d,draw7e];
+var rand8 = [draw8a,draw8b,draw8c,draw8d,draw8e];
+var rand9 = [draw9a,draw9b,draw9c,draw9d,draw9e];
+var rand10 = [draw10a,draw10b,draw10c,draw10d,draw10e];
+var rand11 = [draw11a,draw11b,draw11c,draw11d,draw11e];
+var rand12 = [draw12a,draw12b,draw12c,draw12d,draw12e];
+var rand13 = [draw13a,draw13b,draw13c,draw13d,draw13e];
+var rand14 = [draw14a,draw14b,draw14c,draw14d,draw14e];
+var rand15 = [draw15a,draw15b,draw15c,draw15d,draw15e];
+var holeCoords = new Array();
+var plugImages = new Array();
+var plugs = new Array();
+var winplugs = new Array();
+var currentPlug;
+var currentHole;
+var win;
+var winCount;
+var wrongplug;
+var totalscoreArray = [0,0,0,0,0,0,0,0,0,0,0,0];
+var totalscore;
+var holenumbers;
+var totalholenumbers = 60;
+var sum = 0;
+var hintButton;
+var replayButton;
+var nextButton;
+var homeButton;
+var counter=0;
+var randomstored;
+
+
+var hints = ["Drag and drop A and B into the relevant boxes",
+			"\u222A = union: all elements in set A OR set B\n\u2229 = intersection: all elements in set A AND set B.",
+			"\u2208 = 'is an element of'\n\u2209 = 'is not an element of'",
+			"\u2205 = empty set (there are no elements contained in the set)",
+			"\u2282 = subset\n\u2284 = not a subset",
+			"\u2283 = superset. E.g. A\u2283B means A contains B",
+			"A|B = A without B, or A minus B",
+			"A' = everything that is NOT in A",
+			"|A| = the size of the set A i.e. the number of elements contained in A",
+			"You're on your own now!",
+			"You're on your own now!",
+			"You're on your own now!",
+			"You're on your own now!",
+			"You're on your own now!",
+			"You're on your own now!"];
+
+function initialisedata(){
+	//allows all the images to load before palying the game
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/a.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/b.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/aintersectb.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/acomplement.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/bcomplement.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/ccomplement.png';
+	plugImages[6] = new Image();
+	plugImages[6].src = 'assets/aunionb.png';
+	plugImages[7] = new Image();
+	plugImages[7].src = 'assets/aintersectc.png';
+	plugImages[8] = new Image();
+	plugImages[8].src = 'assets/bintersectc.png';
+	plugImages[9] = new Image();
+	plugImages[9].src = 'assets/awithoutb.png';
+	plugImages[10] = new Image();
+	plugImages[10].src = 'assets/aunionc.png';
+	plugImages[11] = new Image();
+	plugImages[11].src = 'assets/bwithoutc.png';
+	plugImages[12] = new Image();
+	plugImages[12].src = 'assets/c.png';
+	plugImages[13] = new Image();
+	plugImages[13].src = 'assets/cardinalitya.png';
+	plugImages[14] = new Image();
+	plugImages[14].src = 'assets/cardinalityb.png';
+	plugImages[15] = new Image();
+	plugImages[15].src = 'assets/cardinalityc.png';
+	plugImages[16] = new Image();
+	plugImages[16].src = 'assets/complementaunionb.png';
+	plugImages[17] = new Image();
+	plugImages[17].src = 'assets/complementaunionc.png';
+	plugImages[18] = new Image();
+	plugImages[18].src = 'assets/cwithoutb.png';
+	plugImages[19] = new Image();
+	plugImages[19].src = 'assets/elementof.png';
+	plugImages[20] = new Image();
+	plugImages[20].src = 'assets/emptyset.png';
+	plugImages[21] = new Image();
+	plugImages[21].src = 'assets/hint.png';
+	plugImages[22] = new Image();
+	plugImages[22].src = 'assets/next.png';
+	plugImages[23] = new Image();
+	plugImages[23].src = 'assets/replay.png';
+	plugImages[24] = new Image();
+	plugImages[24].src = 'assets/notelementof.png';
+	plugImages[25] = new Image();
+	plugImages[25].src = 'assets/notsubsetof.png';
+	plugImages[26] = new Image();
+	plugImages[26].src = 'assets/notsupersetof.png';
+	plugImages[27] = new Image();
+	plugImages[27].src = 'assets/ssubset.png';
+	plugImages[28] = new Image();
+	plugImages[28].src = 'assets/ssuperset.png';
+	plugImages[29] = new Image();
+	plugImages[29].src = 'assets/subset.png';
+	plugImages[30] = new Image();
+	plugImages[30].src = 'assets/superset.png';
+
+	plugImages = new Array();
+	setup();
+}
+
+function setup(){
+	leveldata[levelCount]();
+	drawlevels[levelCount]();
+}
+
+function playSound(sound){
+	var thissound = document.getElementById('sound');
+    thissound.play();
+}
+
+function startgame(event){
+	if(event.clientX>385 & event.clientX<430 & event.clientY>260 & event.clientY<305){
+		document.removeEventListener("click", startgame, false);
+		levelCount = levelCount+1;
+		setup();
+	}
+}
+
+function startdata(){
+	currentPlug = -1;
+	currentHole = -1;
+	win=false;
+	winCount = 0;
+	wrongplug=0;
+	hintButton = new Image();
+	hintButton.src = 'assets/hint.png';
+	replayButton = new Image();
+	replayButton.src = 'assets/replay.png';
+	nextButton = new Image();
+	nextButton.src = 'assets/next.png';
+	homeButton = new Image();
+	homeButton.src = "assets/home.png";
+}
+
+function level1(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' :  70, 'y' : 390, 'plug' : 0},
+		{'x' : 470, 'y' : 390, 'plug' : 1}]
+
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/a.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/b.png';
+
+	plugs = [0,1,-1,-1];
+	winplugs = [0,0];
+	holenumbers=2;
+	startdata();
+}
+
+function level2(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' :  50, 'y' : 390, 'plug' : 0},
+		{'x' : 470, 'y' : 390, 'plug' : 3},
+		{'x' :  50, 'y' : 480, 'plug' : 2}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/a.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/b.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/aunionb.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/aintersectb.png';
+
+
+	plugs = [0,1,2,3,-1,-1,-1];
+	winplugs = [0,0,0,0];
+	holenumbers=3;
+	startdata();
+}
+
+function level3(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 100, 'y' : 240, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' :  75, 'y' : 390, 'plug' : 3},
+		{'x' : 465, 'y' : 390, 'plug' : 0},
+		{'x' : 120, 'y' : 480, 'plug' : 1},
+		{'x' : 190, 'y' : 480, 'plug' : 2},
+		{'x' : 500, 'y' : 480, 'plug' : 4}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/a.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/elementof.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/aintersectb.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/b.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/notelementof.png';
+
+	plugs = [0,1,2,3,4,-1,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0];
+	holenumbers=5;
+	startdata();
+}
+
+function level4(){
+	holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 130, 'y' : 390, 'plug' : 0},
+	{'x' : 200, 'y' : 390, 'plug' : 3},
+	{'x' : 450, 'y' : 390, 'plug' : 1},
+	{'x' : 210, 'y' : 480, 'plug' : 2},
+	{'x' : 450, 'y' : 480, 'plug' : 4}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/elementof.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/aunionb.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/emptyset.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/b.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/a.png';
+
+
+	plugs = [0,1,2,3,4,-1,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0];
+	holenumbers=5;
+	startdata();
+}
+
+function level5(){
+	holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 650, 'y' : 240, 'plug' : -2},
+	{'x' :  70, 'y' : 410, 'plug' : 0},
+	{'x' : 550, 'y' : 410, 'plug' : 1},
+	{'x' : 110, 'y' : 480, 'plug' : 3}, 
+	{'x' : 545, 'y' : 480, 'plug' : 4}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/aintersectb.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/ssubset.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/notelementof.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/elementof.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/notsubsetof.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/aunionc.png';
+
+
+	plugs = [0,1,2,3,4,5,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0];
+	holenumbers=4;
+	startdata();
+}
+
+function level6(){
+	holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 650, 'y' : 240, 'plug' : -2},
+	{'x' : 125, 'y' : 410, 'plug' : 0},
+	{'x' : 525, 'y' : 410, 'plug' : 4},
+	{'x' :  75, 'y' : 480, 'plug' : 1}, 
+	{'x' : 550, 'y' : 480, 'plug' : 5}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/ssuperset.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/aintersectb.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/elementof.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/ssubset.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/notsupersetof.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/bintersectc.png';
+
+
+	plugs = [0,1,2,3,4,5,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0];
+	holenumbers=4;
+	startdata();
+}
+
+function level7(){
+	holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 650, 'y' : 240, 'plug' : -2},
+	{'x' :  60, 'y' : 410, 'plug' : 0},
+	{'x' : 500, 'y' : 410, 'plug' : 3},
+	{'x' : 135, 'y' : 480, 'plug' : 1}, 
+	{'x' : 510, 'y' : 480, 'plug' : 4},
+	{'x' : 580, 'y' : 480, 'plug' : 5}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/aunionb.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/ssubset.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/a.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/awithoutb.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/notelementof.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/b.png';
+
+
+	plugs = [0,1,2,3,4,5,-1,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0];
+	holenumbers=5;
+	startdata();
+}
+
+function level8(){
+	holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 100, 'y' : 310, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 650, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 310, 'plug' : -2},
+	{'x' :  80, 'y' : 410, 'plug' : 0},
+	{'x' : 575, 'y' : 410, 'plug' : 5}, 
+	{'x' : 110, 'y' : 480, 'plug' : 1},
+	{'x' : 480, 'y' : 480, 'plug' : 4}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/acomplement.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/ssuperset.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/elementof.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/bcomplement.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/bwithoutc.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/emptyset.png';
+	plugImages[6] = new Image();
+	plugImages[6].src = 'assets/aintersectb.png';
+	plugImages[7] = new Image();
+	plugImages[7].src = 'assets/c.png';
+
+
+	plugs = [0,1,2,3,4,5,6,7,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0,0,0];
+	holenumbers=4;
+	startdata();
+}
+
+function level9(){
+holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 650, 'y' : 240, 'plug' : -2},
+	{'x' : 100, 'y' : 410, 'plug' : 0},
+	{'x' : 500, 'y' : 410, 'plug' : 5}, 
+	{'x' : 100, 'y' : 480, 'plug' : 3},
+	{'x' : 500, 'y' : 480, 'plug' : 1}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/cardinalitya.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/acomplement.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/a.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/ccomplement.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/aintersectb.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/cardinalityb.png';
+
+
+	plugs = [0,1,2,3,4,5,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0];
+	holenumbers=4;
+	startdata();
+}
+
+function level10(){
+holeCoords = [
+	{'x' : 100, 'y' : 100, 'plug' : -2},
+	{'x' : 100, 'y' : 170, 'plug' : -2},
+	{'x' : 100, 'y' : 240, 'plug' : -2},
+	{'x' : 100, 'y' : 310, 'plug' : -2},
+	{'x' : 650, 'y' : 100, 'plug' : -2},
+	{'x' : 650, 'y' : 170, 'plug' : -2},
+	{'x' : 650, 'y' : 240, 'plug' : -2},
+	{'x' : 650, 'y' : 310, 'plug' : -2},
+	{'x' : 100, 'y' : 410, 'plug' : 4},
+	{'x' : 490, 'y' : 410, 'plug' : 3},
+	{'x' : 50, 'y' :  480, 'plug' : 2}, 
+	{'x' : 500, 'y' : 480, 'plug' : 6}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/cardinalitya.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/aintersectc.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/acomplement.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/awithoutb.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/cardinalityb.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/ssubset.png';
+	plugImages[6] = new Image();
+	plugImages[6].src = 'assets/ssuperset.png';
+	plugImages[7] = new Image();
+	plugImages[7].src = 'assets/c.png';
+
+
+	plugs = [0,1,2,3,4,5,6,7,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0,0,0];
+	holenumbers = 4;
+	startdata();
+}
+
+function level11(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 100, 'y' : 240, 'plug' : -2},
+		{'x' : 100, 'y' : 310, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' : 650, 'y' : 240, 'plug' : -2},
+		{'x' : 650, 'y' : 310, 'plug' : -2},
+		{'x' : 90, 'y' :  410, 'plug' : 1},
+		{'x' : 600, 'y' : 410, 'plug' : 3},
+		{'x' : 130, 'y' : 480, 'plug' : 7}, 
+		{'x' : 530, 'y' : 480, 'plug' : 5}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/a.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/aintersectb.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/ccomplement.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/emptyset.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/notsupersetof.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/elementof.png';
+	plugImages[6] = new Image();
+	plugImages[6].src = 'assets/aintersectc.png';
+	plugImages[7] = new Image();
+	plugImages[7].src = 'assets/ssuperset.png';
+
+
+	plugs = [0,1,2,3,4,5,6,7,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0,0,0];
+	holenumbers = 4;
+	startdata();
+}
+
+function level12(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 100, 'y' : 240, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' : 650, 'y' : 240, 'plug' : -2},
+		{'x' :  80, 'y' : 410, 'plug' : 1},
+		{'x' : 500, 'y' : 410, 'plug' : 4},
+		{'x' : 245, 'y' : 480, 'plug' : 2}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/notsubsetof.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/aunionb.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/ssubset.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/notelementof.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/aunionc.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/a.png';
+
+
+	plugs = [0,1,2,3,4,5,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0];
+	holenumbers = 3;
+	startdata();
+}
+
+function level13(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 100, 'y' : 240, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' : 650, 'y' : 240, 'plug' : -2},
+		{'x' : 115, 'y' : 410, 'plug' : 3},
+		{'x' : 470, 'y' : 410, 'plug' : 5},
+		{'x' : 240, 'y' : 480, 'plug' : 2}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/aintersectb.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/elementof.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/notsupersetof.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/notelementof.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/ssubset.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/complementaunionb.png';
+
+	plugs = [0,1,2,3,4,5,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0];
+	holenumbers = 3;
+	startdata();
+}
+
+function level14(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 100, 'y' : 240, 'plug' : -2},
+		{'x' : 100, 'y' : 310, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' : 650, 'y' : 240, 'plug' : -2},
+		{'x' : 650, 'y' : 310, 'plug' : -2},
+		{'x' : 100, 'y' : 410, 'plug' : 6},
+		{'x' : 490, 'y' : 410, 'plug' : 3},
+		{'x' : 600, 'y' : 410, 'plug' : 5}, 
+		{'x' : 170, 'y' : 480, 'plug' : 1}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/aunionb.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/ssubset.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/emptyset.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/bcomplement.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/ssuperset.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/aintersectc.png';
+	plugImages[6] = new Image();
+	plugImages[6].src = 'assets/ccomplement.png';
+	plugImages[7] = new Image();
+	plugImages[7].src = 'assets/aunionc.png';
+
+
+	plugs = [0,1,2,3,4,5,6,7,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0,0,0];
+	holenumbers = 4;
+	startdata();
+}
+
+function level15(){
+	holeCoords = [
+		{'x' : 100, 'y' : 100, 'plug' : -2},
+		{'x' : 100, 'y' : 170, 'plug' : -2},
+		{'x' : 100, 'y' : 240, 'plug' : -2},
+		{'x' : 100, 'y' : 310, 'plug' : -2},
+		{'x' : 650, 'y' : 100, 'plug' : -2},
+		{'x' : 650, 'y' : 170, 'plug' : -2},
+		{'x' : 650, 'y' : 240, 'plug' : -2},
+		{'x' : 650, 'y' : 310, 'plug' : -2},
+		{'x' : 105, 'y' : 410, 'plug' : 7},
+		{'x' : 500, 'y' : 410, 'plug' : 1},
+		{'x' : 570, 'y' : 410, 'plug' : 4}, 
+		{'x' : 150, 'y' : 480, 'plug' : 6},
+		{'x' : 340, 'y' : 480, 'plug' : 2},
+		{'x' : 590, 'y' : 480, 'plug' : 5}]
+
+	plugImages = new Array();
+	plugImages[0] = new Image();
+	plugImages[0].src = 'assets/aintersectb.png';
+	plugImages[1] = new Image();
+	plugImages[1].src = 'assets/elementof.png';
+	plugImages[2] = new Image();
+	plugImages[2].src = 'assets/a.png';
+	plugImages[3] = new Image();
+	plugImages[3].src = 'assets/notsupersetof.png';
+	plugImages[4] = new Image();
+	plugImages[4].src = 'assets/complementaunionc.png';
+	plugImages[5] = new Image();
+	plugImages[5].src = 'assets/ssubset.png';
+	plugImages[6] = new Image();
+	plugImages[6].src = 'assets/emptyset.png';
+	plugImages[7] = new Image();
+	plugImages[7].src = 'assets/bwithoutc.png';
+
+
+	plugs = [0,1,2,3,4,5,6,7,-1,-1,-1,-1,-1,-1];
+	winplugs = [0,0,0,0,0,0,0,0];
+	holenumbers = 6;
+	startdata();
+}
+
+function drawHoles(){
+	for(var i=0; i<holeCoords.length;i++)
+    {
+    	ctx.strokeRect(holeCoords[i].x, holeCoords[i].y, 51, 51);
+    }
+
+    for (var i=0; i<plugs.length; i++) {
+    	if (plugs[i] != -1) { 
+    		ctx.drawImage (plugImages[plugs[i]] , holeCoords[i].x, holeCoords[i].y, 50, 50 );
+    	}
+    }
+
+    if (currentPlug != -1) {
+    	// draw current plug (being dragged) at mouse position (mouseX,mouseY)
+    	ctx.drawImage ( plugImages[currentPlug] , mouseX-25, mouseY-25, 50, 50);
+    }
+}
+
+function drawTwoCircles1(){
+	//circle A
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2)-110, (canvas.height)/2-50, 100, 0, 2 * Math.PI);
+	ctx.stroke();
+
+	//circle B
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2)+110, (canvas.height)/2-50,100,0,2 * Math.PI);
+	ctx.stroke();
+
+	//universal set
+	ctx.rect((canvas.width/2)-225, (canvas.height/2)-200, 450, 280);
+	ctx.stroke();
+
+	ctx.font = "30px Arial";
+	ctx.fillText("A", 290, 110);
+	ctx.fillText("B", 510,110);
+
+	ctx.drawImage(hintButton,540,10,40,40);
+	ctx.drawImage(replayButton, 620,10,40,40);
+	ctx.drawImage(nextButton, 700,10,40,40);
+	ctx.drawImage(homeButton, 30,10,40,40);
+}
+
+function drawTwoCircles2(){
+	//circle A
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2)-60, (canvas.height)/2-50, 100, 0, 2 * Math.PI);
+	ctx.stroke();
+
+	//circle B
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2)+60, (canvas.height)/2-50,100,0,2 * Math.PI);
+	ctx.stroke();
+
+	//universal set
+	ctx.rect((canvas.width/2)-225, (canvas.height/2)-200, 450, 280);
+	ctx.stroke();
+
+	ctx.font = "30px Arial";
+	ctx.fillText("A", 330, 110);
+	ctx.fillText("B", 470,110);
+
+	ctx.drawImage(hintButton,540,10,40,40);
+	ctx.drawImage(replayButton, 620,10,40,40);
+	ctx.drawImage(nextButton, 700,10,40,40);
+	ctx.drawImage(homeButton, 30,10,40,40);
+}
+
+function drawThreeCircles(){
+	//circleA
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2)-60, (canvas.height)/2, 100, 0, 2 * Math.PI);
+	ctx.stroke();
+
+	//circleB
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2)+60, (canvas.height)/2,100,0,2 * Math.PI);
+	ctx.stroke();
+
+	//circleC
+	ctx.beginPath();
+	//ctx.arc(Xcoord, Ycoord, size,)
+	ctx.arc(((canvas.width)/2), ((canvas.height)/2)-100,100,0,2 * Math.PI);
+	ctx.stroke();
+
+	//universal set
+	ctx.rect((canvas.width/2)-225, (canvas.height/2)-210, 450, 320);
+	ctx.stroke();
+
+	ctx.font = "30px Arial";
+	ctx.fillText("A", 500,100);
+	ctx.fillText("B", 240,370);
+	ctx.fillText("C", 560,370);
+	ctx.drawImage(hintButton,540,10,40,40);
+	ctx.drawImage(replayButton, 620,10,40,40);
+	ctx.drawImage(nextButton, 700,10,40,40);
+	ctx.drawImage(homeButton, 30,10,40,40);
+}
+
+function drawbackgrounda(){
+	ctx.fillStyle = "#F5F5F5";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "50px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#000000";
+	ctx.fillText(levelCount,(canvas.width)/2, 50);
+	ctx.fillStyle = "#DC143C";
+}
+
+function drawbackgroundb(){
+	ctx.fillStyle = "#F5F5DC";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "50px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#000000";
+	ctx.fillText(levelCount,(canvas.width)/2, 50);
+	ctx.fillStyle = "#FF7F50";
+}
+
+function drawbackgroundc(){
+	ctx.fillStyle = "#F0FFFF";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "50px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#000000";
+	ctx.fillText(levelCount,(canvas.width)/2, 50);
+	ctx.fillStyle = "#6495ED";
+}
+
+function drawbackgroundd(){
+	ctx.fillStyle = "#FFF0F5";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "50px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#000000";
+	ctx.fillText(levelCount,(canvas.width)/2, 50);
+	ctx.fillStyle = "#006400";
+}
+
+function drawbackgrounde(){
+	ctx.fillStyle = "#FFE6CC";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "50px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#000000";
+	ctx.fillText(levelCount,(canvas.width)/2, 50);
+	ctx.fillStyle = "#483D8B";
+}
+
+function draw1(){
+	//randomly selects level from rand1 array for level 1
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand1[randomstored]();
+}
+
+function draw2(){
+	//randomly selects level from rand1 array for level 2
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand2[randomstored]();
+}
+
+function draw3(){
+	//randomly selects level from rand1 array for level 3
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand3[randomstored]();
+}
+
+function draw4(){
+	//randomly selects level from rand1 array for level 4
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand4[randomstored]();
+}
+
+function draw5(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand5[randomstored]();
+}
+
+function draw6(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand6[randomstored]();
+}
+
+function draw7(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand7[randomstored]();
+}
+
+function draw8(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand8[randomstored]();
+}
+
+function draw9(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand9[randomstored]();
+}
+
+function draw10(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand10[randomstored]();
+}
+
+function draw11(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand11[randomstored]();
+}
+
+function draw12(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand12[randomstored]();
+}
+
+function draw13(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand13[randomstored]();
+}
+
+function draw14(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand14[randomstored]();
+}
+
+function draw15(){
+	//randomly selects level from rand1 array for level 5
+	var min=0; 
+    var max=5;  
+    if(counter==0){
+    	var random =Math.floor(Math.random() * (+max - +min)) + +min;
+    	randomstored=random;
+    	counter=counter+1;
+    }
+	rand15[randomstored]();
+}
+
+function drawstart(){
+	ctx.fillStyle = "#F5F5F5";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "50px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#DC143C";
+	ctx.fillText("GetSet!",(canvas.width)/2, (canvas.height)/2-50);
+	nextButton = new Image();
+	nextButton.src = 'assets/next.png';
+	ctx.drawImage(nextButton, ((canvas.width)/2)-20,((canvas.height)/2)-20,40,40);
+	document.addEventListener("click", startgame, false);
+}
+
+function draw1a(){
+	drawbackgrounda();
+	drawTwoCircles1();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 340,220);
+	ctx.fillText("7", 250,220)
+	ctx.fillText("11", 300,280);
+	ctx.fillText("8", 500,200);
+	ctx.fillText("18", 550,280);
+	ctx.fillText("           = {3,7,11}", 150, 430);
+	ctx.fillText("           = {8,18}", 550, 430);
+	drawHoles();
+}
+
+function draw1b(){
+	drawbackgroundb();
+	drawTwoCircles1();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 340,220);
+	ctx.fillText("6", 250,220)
+	ctx.fillText("10", 300,280);
+	ctx.fillText("1", 500,200);
+	ctx.fillText("11", 550,280);
+	ctx.fillText("23", 470,260);
+	ctx.fillText("           = {2,6,10}", 150, 430);
+	ctx.fillText("            = {1,11,23}", 550, 430);
+	drawHoles();
+}
+
+function draw1c(){
+	drawbackgroundc();
+	drawTwoCircles1();
+	ctx.font = "30px Arial";
+	ctx.fillText("1", 340,220);
+	ctx.fillText("19", 250,220)
+	ctx.fillText("11", 300,280);
+	ctx.fillText("6", 500,200);
+	ctx.fillText("12", 550,280);
+	ctx.fillText("            = {1,11,19}", 150, 430);
+	ctx.fillText("         = {6,12}", 550, 430);
+	drawHoles();
+}
+
+function draw1d(){
+	drawbackgroundd();
+	drawTwoCircles1();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 340,220);
+	ctx.fillText("9", 250,220)
+	ctx.fillText("8", 480,280);
+	ctx.fillText("10", 500,200);
+	ctx.fillText("22", 550,280);
+	ctx.fillText("         = {3,9}", 150, 430);
+	ctx.fillText("            = {8,10,22}", 550, 430);
+	drawHoles();
+}
+
+function draw1e(){
+	drawbackgrounde();
+	drawTwoCircles1();
+	ctx.font = "30px Arial";
+	ctx.fillText("5", 340,220);
+	ctx.fillText("13", 250,220)
+	ctx.fillText("17", 300,280);
+	ctx.fillText("6", 500,200);
+	ctx.fillText("4", 550,280);
+	ctx.fillText("            = {5,13,17}", 150, 430);
+	ctx.fillText("        = {4,6}", 550, 430);
+	drawHoles();
+}
+
+function draw2a(){
+	drawbackgrounda();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("6", 400,270);
+	ctx.fillText("12", 400,220);
+	ctx.fillText("2", 280,210)
+	ctx.fillText("4", 300,280);
+	ctx.fillText("3", 500,200);
+	ctx.fillText("9", 510,280);
+	ctx.fillText("           = {2,4,6,12}", 150, 430);
+	ctx.fillText("          = {6,12}", 550, 430);
+	ctx.fillText("          = {2,3,4,6,9,12}", 180, 520);
+	drawHoles();
+}
+
+function draw2b(){
+	drawbackgroundb();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("15", 400,250);
+	ctx.fillText("3", 280,210)
+	ctx.fillText("6", 300,280);
+	ctx.fillText("5", 500,200);
+	ctx.fillText("10", 510,280);
+	ctx.fillText("          = {3,6,15}", 150, 430);
+	ctx.fillText("         = {15}", 540, 430);
+	ctx.fillText("        = {3,5,6,10,15}", 190, 520);
+	drawHoles();
+}
+
+function draw2c(){
+	drawbackgroundc();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,250);
+	ctx.fillText("3", 280,210)
+	ctx.fillText("5", 300,280);
+	ctx.fillText("12", 500,200);
+	ctx.fillText("14", 510,280);
+	ctx.fillText("           = {2,3,5}", 130, 430);
+	ctx.fillText("           = {2}", 530, 430);
+	ctx.fillText("           = {2,3,5,12,14}", 170, 520);
+	drawHoles();
+}
+
+function draw2d(){
+	drawbackgroundd();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("12", 400,270);
+	ctx.fillText("24", 400,220);
+	ctx.fillText("3", 280,210)
+	ctx.fillText("9", 300,280);
+	ctx.fillText("8", 500,200);
+	ctx.fillText("16", 510,280);
+	ctx.fillText("           = {3,9,12,24}", 160, 430);
+	ctx.fillText("           = {12,24}", 550, 430);
+	ctx.fillText("           = {3,8,9,12,16,24}", 190, 520);
+	drawHoles();
+}
+
+function draw2e(){
+	drawbackgrounde();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,270);
+	ctx.fillText("25", 400,220);
+	ctx.fillText("7", 280,210)
+	ctx.fillText("11", 300,280);
+	ctx.fillText("4", 500,200);
+	ctx.fillText("16", 510,280);
+	ctx.fillText("           = {7,9,11,25}", 160, 430);
+	ctx.fillText("           = {9,25}", 550, 430);
+	ctx.fillText("           = {4,7,9,11,16,25}", 200, 520);
+	drawHoles();
+}
+
+function draw3a(){
+	drawbackgrounda();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("20", 400,220);
+	ctx.fillText("2", 280,210)
+	ctx.fillText("8", 300,280);
+	ctx.fillText("15", 500,200);
+	ctx.fillText("           = {15,20}", 150, 430);
+	ctx.fillText("           = {2,8,20}", 550, 430);
+	ctx.fillText(" 20                      ", 180, 520);
+	ctx.fillText(" 9           A \u222A B", 550, 520);
+	drawHoles();
+}
+
+function draw3b(){
+	drawbackgroundb();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("10", 400,220);
+	ctx.fillText("4", 280,210)
+	ctx.fillText("6", 300,280);
+	ctx.fillText("5", 500,200);
+	ctx.fillText("           = {5,10}", 150, 430);
+	ctx.fillText("           = {4,6,10}", 550, 430);
+	ctx.fillText(" 10                      ", 180, 520);
+	ctx.fillText(" 7           A \u222A B", 550, 520);
+	drawHoles();
+}
+
+function draw3c(){
+	drawbackgroundc();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("10", 400,200);
+	ctx.fillText("20", 400,240);
+	ctx.fillText("8", 280,210)
+	ctx.fillText("6", 300,280);
+	ctx.fillText("5", 500,200);
+	ctx.fillText("           = {5,10,20}", 170, 430);
+	ctx.fillText("           = {6,8,10,20}", 570, 430);
+	ctx.fillText(" 10                      ", 180, 520);
+	ctx.fillText(" 3           A \u222A B", 550, 520);
+	drawHoles();
+}
+
+function draw3d(){
+	drawbackgroundd();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,220);
+	ctx.fillText("3", 280,210)
+	ctx.fillText("11", 300,280);
+	ctx.fillText("16", 500,200);
+	ctx.fillText("           = {9,16}", 150, 430);
+	ctx.fillText("           = {3,9,11}", 550, 430);
+	ctx.fillText(" 9                      ", 180, 520);
+	ctx.fillText(" 7           A \u222A B", 550, 520);
+	drawHoles();
+}
+
+function draw3e(){
+	drawbackgrounde();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("20", 400,220);
+	ctx.fillText("4", 280,210)
+	ctx.fillText("8", 300,280);
+	ctx.fillText("10", 500,200);
+	ctx.fillText("           = {10,20}", 150, 430);
+	ctx.fillText("           = {4,8,20}", 550, 430);
+	ctx.fillText(" 20                      ", 180, 520);
+	ctx.fillText(" 7           A \u222A B", 550, 520);
+	drawHoles();
+}
+
+function draw4a(){
+	drawbackgrounda();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 280,210);
+	ctx.fillText("4", 300,280);
+	ctx.fillText("1", 500,200);
+	ctx.fillText("5", 480,270);
+	ctx.fillText("3", 530,250);
+	ctx.fillText("5          ", 150, 430);
+	ctx.fillText("           = {1,2,3,4,5}", 550, 430);
+	ctx.fillText("A \u2229 B =           ", 180, 520);
+	ctx.fillText("           = {2,4}", 510,520);
+	drawHoles();
+}
+
+function draw4b(){
+	drawbackgroundb();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 280,210);
+	ctx.fillText("4", 300,290);
+	ctx.fillText("6", 330,240);
+	ctx.fillText("7", 500,200);
+	ctx.fillText("5", 480,270);
+	ctx.fillText("7          ", 150, 430);
+	ctx.fillText("           = {2,4,5,6,7}", 550, 430);
+	ctx.fillText("A \u2229 B =           ", 180, 520);
+	ctx.fillText("           = {2,4,6}", 525,520);
+	drawHoles();
+}
+
+function draw4c(){
+	drawbackgroundc();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("8", 280,210);
+	ctx.fillText("6", 300,280);
+	ctx.fillText("5", 500,200);
+	ctx.fillText("7", 480,270);
+	ctx.fillText("9", 530,250);
+	ctx.fillText("9          ", 150, 430);
+	ctx.fillText("           = {5,6,7,8,9}", 550, 430);
+	ctx.fillText("A \u2229 B =           ", 180, 520);
+	ctx.fillText("           = {6,8}", 510,520);
+	drawHoles();
+}
+
+function draw4d(){
+	drawbackgroundd();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 280,210);
+	ctx.fillText("4", 300,280);
+	ctx.fillText("8", 330,200);
+	ctx.fillText("1", 500,200);
+	ctx.fillText("3", 530,250);
+	ctx.fillText("3          ", 150, 430);
+	ctx.fillText("           = {1,2,3,4,8}", 550, 430);
+	ctx.fillText("A \u2229 B =           ", 180, 520);
+	ctx.fillText("           = {2,4,8}", 525,520);
+	drawHoles();
+}
+
+function draw4e(){
+	drawbackgrounde();
+	drawTwoCircles2();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 280,210);
+	ctx.fillText("6", 300,280);
+	ctx.fillText("11", 500,200);
+	ctx.fillText("7", 480,270);
+	ctx.fillText("9", 530,250);
+	ctx.fillText("11          ", 140, 430);
+	ctx.fillText("           = {4,6,7,9,11}", 560, 430);
+	ctx.fillText("A \u2229 B =           ", 180, 520);
+	ctx.fillText("           = {4,6}", 510,520);
+	drawHoles();
+}
+
+function draw5a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("6", 450,220)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("35", 280,280);
+	ctx.fillText("10", 400,310);
+	ctx.fillText("           =  \u2205", 120, 450);
+	ctx.fillText("{5,35}          B", 550, 450);
+	ctx.fillText("    2           C", 120, 520);
+	ctx.fillText("{2,3}          A", 550, 520);
+	drawHoles();
+}
+
+function draw5b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("7", 400,150);
+	ctx.fillText("12", 450,220)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("35", 280,280);
+	ctx.fillText("10", 400,310);
+	ctx.fillText("           =  \u2205", 120, 450);
+	ctx.fillText("{10,35}          B", 540, 450);
+	ctx.fillText("    2           C", 120, 520);
+	ctx.fillText("{2,3}          A", 550, 520);
+	drawHoles();
+}
+
+function draw5c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,150);
+	ctx.fillText("6", 450,220)
+	ctx.fillText("8", 480,300);
+	ctx.fillText("15", 310,330);
+	ctx.fillText("5", 280,280);
+	ctx.fillText("10", 400,310);
+	ctx.fillText("           =  \u2205", 120, 450);
+	ctx.fillText("{5,15}          B", 550, 450);
+	ctx.fillText("    8           C", 120, 520);
+	ctx.fillText("{3,8}          A", 550, 520);
+	drawHoles();
+}
+
+function draw5d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("7", 400,150);
+	ctx.fillText("12", 450,220)
+	ctx.fillText("4", 480,300);
+	ctx.fillText("5", 310,350);
+	ctx.fillText("15", 330,300);
+	ctx.fillText("35", 280,280);
+	ctx.fillText("10", 400,310);
+	ctx.fillText("           =  \u2205", 120, 450);
+	ctx.fillText("{5,15,35}          B", 530, 450);
+	ctx.fillText("    4           C", 120, 520);
+	ctx.fillText("{4,7}          A", 550, 520);
+	drawHoles();
+}
+
+function draw5e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("6", 450,220)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("30", 280,280);
+	ctx.fillText("10", 400,310);
+	ctx.fillText("           =  \u2205", 120, 450);
+	ctx.fillText("{10,30}          B", 540, 450);
+	ctx.fillText("    2           C", 120, 520);
+	ctx.fillText("{2,3,6}          A", 540, 520);
+	drawHoles();
+}
+
+function draw6a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	
+	ctx.font = "30px Arial";
+	ctx.fillText("8", 400,320);
+	ctx.fillText("2", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("12", 340,230);
+	ctx.fillText("B           A", 150, 450);
+	ctx.fillText("B           C", 550, 450);
+	ctx.fillText("            = {12}", 130, 520);
+	ctx.fillText("8 \u2208           ", 560, 520);
+	drawHoles();
+}
+
+function draw6b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	
+	ctx.font = "30px Arial";
+	ctx.fillText("6", 400,320);
+	ctx.fillText("7", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("16", 340,230);
+	ctx.fillText("B           A", 150, 450);
+	ctx.fillText("B           C", 550, 450);
+	ctx.fillText("            = {16}", 130, 520);
+	ctx.fillText("6 \u2208           ", 560, 520);
+	drawHoles();
+}
+
+function draw6c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,320);
+	ctx.fillText("2", 480,300);
+	ctx.fillText("8", 310,330);
+	ctx.fillText("10", 340,230);
+	ctx.fillText("B           A", 150, 450);
+	ctx.fillText("B           C", 550, 450);
+	ctx.fillText("            = {10}", 130, 520);
+	ctx.fillText("3 \u2208           ", 560, 520);
+	drawHoles();
+}
+
+function draw6d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,320);
+	ctx.fillText("6", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("2", 340,230);
+	ctx.fillText("B           A", 150, 450);
+	ctx.fillText("B           C", 550, 450);
+	ctx.fillText("            = {2}", 130, 520);
+	ctx.fillText("9 \u2208           ", 560, 520);
+	drawHoles();
+}
+
+function draw6e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,320);
+	ctx.fillText("2", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("14", 340,230);
+	ctx.fillText("B           A", 150, 450);
+	ctx.fillText("B           C", 550, 450);
+	ctx.fillText("            = {14}", 130, 520);
+	ctx.fillText("3 \u2208           ", 560, 520);
+	drawHoles();
+}
+
+function draw7a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("6", 450,220)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("15", 340,230);
+	ctx.fillText("           = {3,5,6,15}", 150, 450);
+	ctx.fillText("             = {3,6}", 550, 450);
+	ctx.fillText("A \u2229 C           A", 130, 520);
+	ctx.fillText("3                  ", 560, 520);
+	drawHoles();
+}
+
+function draw7b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,150);
+	ctx.fillText("9", 450,220)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("8", 310,330);
+	ctx.fillText("16", 340,230);
+	ctx.fillText("           = {2,8,9,16}", 150, 450);
+	ctx.fillText("             = {2,9}", 550, 450);
+	ctx.fillText("A \u2229 C           A", 130, 520);
+	ctx.fillText("2                  ", 560, 520);
+	drawHoles();
+}
+
+function draw7c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("7", 450,220)
+	ctx.fillText("8", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("18", 340,230);
+	ctx.fillText("           = {4,5,7,18}", 150, 450);
+	ctx.fillText("             = {4,7}", 550, 450);
+	ctx.fillText("A \u2229 C           A", 130, 520);
+	ctx.fillText("4                  ", 560, 520);
+	drawHoles();
+}
+
+function draw7d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("1", 400,150);
+	ctx.fillText("4", 450,220)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("3", 310,330);
+	ctx.fillText("11", 340,230);
+	ctx.fillText("           = {1,3,4,11}", 150, 450);
+	ctx.fillText("             = {1,4}", 550, 450);
+	ctx.fillText("A \u2229 C           A", 130, 520);
+	ctx.fillText("1                  ", 560, 520);
+	drawHoles();
+}
+
+function draw7e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("7", 400,150);
+	ctx.fillText("4", 450,220)
+	ctx.fillText("8", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("17", 340,230);
+	ctx.fillText("           = {4,5,7,17}", 150, 450);
+	ctx.fillText("             = {4,7}", 550, 450);
+	ctx.fillText("A \u2229 C           A", 130, 520);
+	ctx.fillText("7                  ", 560, 520);
+	drawHoles();
+}
+
+function draw8a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,150);
+	ctx.fillText("8", 350,230)
+	ctx.fillText("4", 310,330);
+	ctx.fillText("12", 400,310);
+	ctx.fillText("           = {4,12}", 150, 450);
+	ctx.fillText("A \u2229 C =           ", 550, 450);
+	ctx.fillText("   B            C", 120, 520);
+	ctx.fillText("           = {4,8}", 540, 520);
+	drawHoles();
+}
+
+function draw8b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,150);
+	ctx.fillText("9", 350,230)
+	ctx.fillText("6", 310,330);
+	ctx.fillText("14", 400,310);
+	ctx.fillText("           = {6,14}", 150, 450);
+	ctx.fillText("A \u2229 C =           ", 550, 450);
+	ctx.fillText("   B            C", 120, 520);
+	ctx.fillText("           = {6,9}", 540, 520);
+	drawHoles();
+}
+
+function draw8c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("9", 350,230)
+	ctx.fillText("5", 310,330);
+	ctx.fillText("12", 400,310);
+	ctx.fillText("           = {5,12}", 150, 450);
+	ctx.fillText("A \u2229 C =           ", 550, 450);
+	ctx.fillText("   B            C", 120, 520);
+	ctx.fillText("           = {5,9}", 540, 520);
+	drawHoles();
+}
+
+function draw8d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("10", 400,150);
+	ctx.fillText("8", 350,230)
+	ctx.fillText("4", 310,330);
+	ctx.fillText("14", 400,310);
+	ctx.fillText("           = {4,14}", 150, 450);
+	ctx.fillText("A \u2229 C =           ", 550, 450);
+	ctx.fillText("   B            C", 120, 520);
+	ctx.fillText("           = {4,8}", 540, 520);
+	drawHoles();
+}
+
+function draw8e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("6", 400,150);
+	ctx.fillText("7", 350,230)
+	ctx.fillText("4", 310,330);
+	ctx.fillText("18", 400,310);
+	ctx.fillText("           = {4,18}", 150, 450);
+	ctx.fillText("A \u2229 C =           ", 550, 450);
+	ctx.fillText("   B            C", 120, 520);
+	ctx.fillText("           = {4,7}", 540, 520);
+	drawHoles();
+}
+
+function draw9a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("4", 460,220)
+	ctx.fillText("10", 310,330);
+	ctx.fillText("16", 280,280);
+	ctx.fillText("5", 400,310);
+	ctx.fillText("          = 2", 150, 450);
+	ctx.fillText("          = 3", 550, 450);
+	ctx.fillText("           = {3,10,16}", 190, 520);
+	ctx.fillText("          = {5,10,16}", 590,520);
+	drawHoles();
+}
+
+function draw9b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("6", 400,150);
+	ctx.fillText("2", 460,220)
+	ctx.fillText("11", 310,330);
+	ctx.fillText("13", 280,280);
+	ctx.fillText("8", 400,310);
+	ctx.fillText("          = 2", 150, 450);
+	ctx.fillText("          = 3", 550, 450);
+	ctx.fillText("           = {6,11,13}", 190, 520);
+	ctx.fillText("          = {8,11,13}", 590,520);
+	drawHoles();
+}
+
+function draw9c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("6", 460,220)
+	ctx.fillText("7", 310,330);
+	ctx.fillText("11", 280,280);
+	ctx.fillText("5", 400,310);
+	ctx.fillText("          = 2", 150, 450);
+	ctx.fillText("          = 3", 550, 450);
+	ctx.fillText("           = {4,7,11}", 190, 520);
+	ctx.fillText("          = {5,7,11}", 590,520);
+	drawHoles();
+}
+
+function draw9d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("2", 460,220)
+	ctx.fillText("5", 310,330);
+	ctx.fillText("14", 280,280);
+	ctx.fillText("3", 400,310);
+	ctx.fillText("          = 2", 150, 450);
+	ctx.fillText("          = 3", 550, 450);
+	ctx.fillText("           = {4,5,14}", 190, 520);
+	ctx.fillText("          = {3,5,14}", 590,520);
+	drawHoles();
+}
+
+function draw9e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("2", 460,220)
+	ctx.fillText("8", 310,330);
+	ctx.fillText("16", 280,280);
+	ctx.fillText("7", 400,310);
+	ctx.fillText("          = 2", 150, 450);
+	ctx.fillText("          = 3", 550, 450);
+	ctx.fillText("           = {3,8,16}", 190, 520);
+	ctx.fillText("          = {7,8,16}", 590,520);
+	drawHoles();
+}
+
+function draw10a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("8", 400,150);
+	ctx.fillText("5", 400,320)
+	ctx.fillText("3", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("14", 340,230);
+	ctx.fillText("          = 3", 150, 450);
+	ctx.fillText("          = {8}", 550, 450);
+	ctx.fillText("           = {3,4,5}", 130, 520);
+	ctx.fillText("B           B \u2229 C", 560, 520);
+	drawHoles();
+}
+
+function draw10b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,150);
+	ctx.fillText("8", 400,320)
+	ctx.fillText("3", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("21", 350,230);
+	ctx.fillText("          = 3", 150, 450);
+	ctx.fillText("          = {9}", 550, 450);
+	ctx.fillText("           = {3,4,8}", 130, 520);
+	ctx.fillText("B           B \u2229 C", 560, 520);
+	drawHoles();
+}
+
+function draw10c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,150);
+	ctx.fillText("7", 400,320)
+	ctx.fillText("3", 480,300);
+	ctx.fillText("5", 310,330);
+	ctx.fillText("12", 340,230);
+	ctx.fillText("          = 3", 150, 450);
+	ctx.fillText("          = {2}", 550, 450);
+	ctx.fillText("           = {3,5,7}", 130, 520);
+	ctx.fillText("B           B \u2229 C", 560, 520);
+	drawHoles();
+}
+
+function draw10d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,150);
+	ctx.fillText("11", 400,320)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("10", 340,230);
+	ctx.fillText("          = 3", 150, 450);
+	ctx.fillText("          = {9}", 550, 450);
+	ctx.fillText("           = {2,4,11}", 130, 520);
+	ctx.fillText("B           B \u2229 C", 560, 520);
+	drawHoles();
+}
+
+function draw10e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("1", 400,150);
+	ctx.fillText("8", 400,320)
+	ctx.fillText("2", 480,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("15", 340,230);
+	ctx.fillText("          = 3", 150, 450);
+	ctx.fillText("          = {1}", 550, 450);
+	ctx.fillText("           = {2,4,8}", 130, 520);
+	ctx.fillText("B           B \u2229 C", 560, 520);
+	drawHoles();
+}
+
+function draw11a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("6", 400,150);
+	ctx.fillText("5", 400,320)
+	ctx.fillText("11", 290,270);
+	ctx.fillText("7", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("15", 450,230);
+	ctx.fillText("A \\ (       ) = {6,15}", 150, 450);
+	ctx.fillText("A \u2229 B \u2229 C =           ", 550, 450);
+	ctx.fillText("A \u222A B           C", 130, 520);
+	ctx.fillText("7           B", 560, 520);
+	drawHoles();
+}
+
+function draw11b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("8", 400,150);
+	ctx.fillText("5", 400,320)
+	ctx.fillText("11", 290,270);
+	ctx.fillText("3", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("13", 450,230);
+	ctx.fillText("A \\ (       ) = {8,13}", 150, 450);
+	ctx.fillText("A \u2229 B \u2229 C =           ", 550, 450);
+	ctx.fillText("A \u222A B           C", 130, 520);
+	ctx.fillText("3           B", 560, 520);
+	drawHoles();
+}
+
+function draw11c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,150);
+	ctx.fillText("7", 400,320)
+	ctx.fillText("13", 290,270);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("18", 450,230);
+	ctx.fillText("A \\ (       ) = {2,18}", 150, 450);
+	ctx.fillText("A \u2229 B \u2229 C =           ", 550, 450);
+	ctx.fillText("A \u222A B           C", 130, 520);
+	ctx.fillText("4           B", 560, 520);
+	drawHoles();
+}
+
+function draw11d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("8", 400,320)
+	ctx.fillText("10", 290,270);
+	ctx.fillText("13", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("15", 450,230);
+	ctx.fillText("A \\ (       ) = {4,15}", 150, 450);
+	ctx.fillText("A \u2229 B \u2229 C =           ", 550, 450);
+	ctx.fillText("A \u222A B           C", 130, 520);
+	ctx.fillText("13           B", 550, 520);
+	drawHoles();
+}
+
+function draw11e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 400,150);
+	ctx.fillText("5", 400,320)
+	ctx.fillText("11", 290,270);
+	ctx.fillText("14", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("10", 450,230);
+	ctx.fillText("A \\ (       ) = {3,10}", 150, 450);
+	ctx.fillText("A \u2229 B \u2229 C =           ", 550, 450);
+	ctx.fillText("A \u222A B           C", 130, 520);
+	ctx.fillText("14           B", 550, 520);
+	drawHoles();
+}
+
+function draw12a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("15", 480,300);
+	ctx.fillText("9", 330,350);
+	ctx.fillText("12", 350,220);
+	ctx.fillText("(        )' = {15}", 150, 450);
+	ctx.fillText("|        | = 3", 550, 450);
+	ctx.fillText("A \u2229 (B \u222A C)'           A", 200, 520);
+	drawHoles();
+}
+
+function draw12b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("2", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("11", 480,300);
+	ctx.fillText("9", 330,350);
+	ctx.fillText("12", 350,220);
+	ctx.fillText("(        )' = {11}", 150, 450);
+	ctx.fillText("|        | = 3", 550, 450);
+	ctx.fillText("A \u2229 (B \u222A C)'           A", 200, 520);
+	drawHoles();
+}
+
+function draw12c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("18", 480,300);
+	ctx.fillText("9", 330,350);
+	ctx.fillText("12", 350,220);
+	ctx.fillText("(        )' = {18}", 150, 450);
+	ctx.fillText("|        | = 3", 550, 450);
+	ctx.fillText("A \u2229 (B \u222A C)'           A", 200, 520);
+	drawHoles();
+}
+
+function draw12d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("5", 400,150);
+	ctx.fillText("2", 300,280)
+	ctx.fillText("13", 480,300);
+	ctx.fillText("9", 330,350);
+	ctx.fillText("8", 350,220);
+	ctx.fillText("(        )' = {13}", 150, 450);
+	ctx.fillText("|        | = 3", 550, 450);
+	ctx.fillText("A \u2229 (B \u222A C)'           A", 200, 520);
+	drawHoles();
+}
+
+function draw12e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("7", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("21", 480,300);
+	ctx.fillText("5", 330,350);
+	ctx.fillText("10", 350,220);
+	ctx.fillText("(        )' = {21}", 150, 450);
+	ctx.fillText("|        | = 3", 550, 450);
+	ctx.fillText("A \u2229 (B \u222A C)'           A", 200, 520);
+	drawHoles();
+}
+
+function draw13a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("9", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("14", 480,290);
+	ctx.fillText("6", 330,350);
+	ctx.fillText("4", 510,330);
+	ctx.fillText("36", 400,250);
+	ctx.fillText("9           A'", 150, 450);
+	ctx.fillText("|         \u2229 C| = 2", 550, 450);
+	ctx.fillText("(A \u2229 B \u2229 C)'           C", 200, 520);
+	drawHoles();
+}
+
+function draw13b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("8", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("12", 480,290);
+	ctx.fillText("6", 330,350);
+	ctx.fillText("2", 510,330);
+	ctx.fillText("17", 400,250);
+	ctx.fillText("8           A'", 150, 450);
+	ctx.fillText("|         \u2229 C| = 2", 550, 450);
+	ctx.fillText("(A \u2229 B \u2229 C)'           C", 200, 520);
+	drawHoles();
+}
+
+function draw13c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("7", 400,150);
+	ctx.fillText("5", 300,280)
+	ctx.fillText("15", 480,290);
+	ctx.fillText("6", 330,350);
+	ctx.fillText("4", 510,330);
+	ctx.fillText("38", 400,250);
+	ctx.fillText("7           A'", 150, 450);
+	ctx.fillText("|         \u2229 C| = 2", 550, 450);
+	ctx.fillText("(A \u2229 B \u2229 C)'           C", 200, 520);
+	drawHoles();
+}
+
+function draw13d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("1", 400,150);
+	ctx.fillText("2", 300,280)
+	ctx.fillText("14", 480,290);
+	ctx.fillText("6", 330,350);
+	ctx.fillText("4", 510,330);
+	ctx.fillText("23", 400,250);
+	ctx.fillText("1           A'", 150, 450);
+	ctx.fillText("|         \u2229 C| = 2", 550, 450);
+	ctx.fillText("(A \u2229 B \u2229 C)'           C", 200, 520);
+	drawHoles();
+}
+
+function draw13e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("4", 400,150);
+	ctx.fillText("3", 300,280)
+	ctx.fillText("14", 480,290);
+	ctx.fillText("6", 330,350);
+	ctx.fillText("5", 510,330);
+	ctx.fillText("22", 400,250);
+	ctx.fillText("4           A'", 150, 450);
+	ctx.fillText("|         \u2229 C| = 2", 550, 450);
+	ctx.fillText("(A \u2229 B \u2229 C)'           C", 200, 520);
+	drawHoles();
+}
+
+function draw14a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("5", 500,300);
+	ctx.fillText("4", 310,330);
+	ctx.fillText("10", 340,230);
+	ctx.fillText("14", 450,230);
+	ctx.fillText("A \\          = {14}", 150, 450);
+	ctx.fillText("A \\ (       )' =          ", 550, 450);
+	ctx.fillText("{10,14}           A \u222A B \u222A C", 210, 520);
+	drawHoles();
+}
+
+function draw14b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 500,300);
+	ctx.fillText("2", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("21", 450,230);
+	ctx.fillText("A \\          = {21}", 150, 450);
+	ctx.fillText("A \\ (       )' =          ", 550, 450);
+	ctx.fillText("{9,21}           A \u222A B \u222A C", 220, 520);
+	drawHoles();
+}
+
+function draw14c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("5", 500,300);
+	ctx.fillText("2", 310,330);
+	ctx.fillText("8", 340,230);
+	ctx.fillText("17", 450,230);
+	ctx.fillText("A \\          = {17}", 150, 450);
+	ctx.fillText("A \\ (       )' =          ", 550, 450);
+	ctx.fillText("{8,17}           A \u222A B \u222A C", 220, 520);
+	drawHoles();
+}
+
+function draw14d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("3", 500,300);
+	ctx.fillText("7", 310,330);
+	ctx.fillText("8", 340,230);
+	ctx.fillText("10", 450,230);
+	ctx.fillText("A \\          = {10}", 150, 450);
+	ctx.fillText("A \\ (       )' =          ", 550, 450);
+	ctx.fillText("{8,10}           A \u222A B \u222A C", 220, 520);
+	drawHoles();
+}
+
+function draw14e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.font = "30px Arial";
+	ctx.fillText("1", 500,300);
+	ctx.fillText("8", 310,330);
+	ctx.fillText("9", 340,230);
+	ctx.fillText("22", 450,230);
+	ctx.fillText("A \\          = {22}", 150, 450);
+	ctx.fillText("A \\ (       )' =          ", 550, 450);
+	ctx.fillText("{9,22}           A \u222A B \u222A C", 220, 520);
+	drawHoles();
+}
+
+function draw15a(){
+	drawbackgrounda();
+	drawThreeCircles();
+	ctx.fillText("18", 310,330);
+	ctx.fillText("6", 340,230);
+	ctx.fillText("10", 400,250);
+	ctx.fillText("| A \u2229         | = 1", 130, 450);
+	ctx.fillText("18                    ", 550, 450);
+	ctx.fillText("A \u2229 A' =           ", 130, 520);
+	ctx.fillText("C \u2282         & C \u2282 B \u21D2 C          A \u2229 B", 510, 520);
+	drawHoles();
+}
+
+function draw15b(){
+	drawbackgroundb();
+	drawThreeCircles();
+	ctx.fillText("14", 310,330);
+	ctx.fillText("2", 340,230);
+	ctx.fillText("5", 400,250);
+	ctx.fillText("| A \u2229         | = 1", 130, 450);
+	ctx.fillText("14                    ", 550, 450);
+	ctx.fillText("A \u2229 A' =           ", 130, 520);
+	ctx.fillText("C \u2282         & C \u2282 B \u21D2 C          A \u2229 B", 510, 520);
+	drawHoles();
+}
+
+function draw15c(){
+	drawbackgroundc();
+	drawThreeCircles();
+	ctx.fillText("13", 310,330);
+	ctx.fillText("16", 340,230);
+	ctx.fillText("20", 400,250);
+	ctx.fillText("| A \u2229         | = 1", 130, 450);
+	ctx.fillText("13                    ", 550, 450);
+	ctx.fillText("A \u2229 A' =           ", 130, 520);
+	ctx.fillText("C \u2282         & C \u2282 B \u21D2 C          A \u2229 B", 510, 520);
+	drawHoles();
+}
+
+function draw15d(){
+	drawbackgroundd();
+	drawThreeCircles();
+	ctx.fillText("17", 310,330);
+	ctx.fillText("7", 340,230);
+	ctx.fillText("21", 400,250);
+	ctx.fillText("| A \u2229         | = 1", 130, 450);
+	ctx.fillText("17                    ", 550, 450);
+	ctx.fillText("A \u2229 A' =           ", 130, 520);
+	ctx.fillText("C \u2282         & C \u2282 B \u21D2 C          A \u2229 B", 510, 520);
+	drawHoles();
+}
+
+function draw15e(){
+	drawbackgrounde();
+	drawThreeCircles();
+	ctx.fillText("13", 310,330);
+	ctx.fillText("4", 340,230);
+	ctx.fillText("18", 400,250);
+	ctx.fillText("| A \u2229         | = 1", 130, 450);
+	ctx.fillText("13                    ", 550, 450);
+	ctx.fillText("A \u2229 A' =           ", 130, 520);
+	ctx.fillText("C \u2282         & C \u2282 B \u21D2 C          A \u2229 B", 510, 520);
+	drawHoles();
+}
+
+function drawend(){
+	ctx.fillStyle = "#F5F5F5";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.font = "30px Arial";
+	ctx.textAlign = "center";
+	ctx.fillStyle = "#DC143C";
+	ctx.fillText("Thanks for playing!",(canvas.width)/2, 30);
+	ctx.drawImage(replayButton, 620,10,40,40);
+	ctx.font = "25px Arial";
+	ctx.fillText("Level", 100, 70);
+	ctx.fillText("Max Score", 300, 70);
+	ctx.fillText("Your Score", 500, 70);
+	drawscoretable();
+}
+
+function drawscoretable(){
+	ctx.font = "25px Arial";
+	var x1=100;
+	var x2=300;
+	var x3=500;
+	var y=100;
+	var maxscores = new Array();
+	maxscores = [2,3,5,5,4,4,5,4,4,4,4,3,3,4,6];
+	for(var i=0;i<=14;i++){
+		ctx.fillText(i+1, x1,y);
+		ctx.fillText(maxscores[i],x2,y);
+		ctx.fillText((maxscores[i]-totalscoreArray[i+1]),x3,y);
+		y=y+30;
+	}
+	ctx.font = "30px Arial";
+	ctx.fillText("Total: ", 670, 300);
+	ctx.fillText(totalscore + " / " + totalholenumbers, 670, 350)
+}
+//event listeners for interactions on canvas
+document.addEventListener("mousedown", mousedown, false);
+document.addEventListener('mouseup',   mouseup,   false);
+
+var mouseX;
+var mouseY;
+
+document.addEventListener('mousemove',   mousemove,   false);
+document.addEventListener("click", hintButton, false);
+document.addEventListener("click", nextButton, false);
+document.addEventListener("click", retryButton, false);
+document.addEventListener("click", homeButton, false);
+
+function mousemove(event){
+	// update mouseX and mouseY with new mouse position
+	mouseX = event.clientX;
+	mouseY = event.clientY;
+	drawlevels[levelCount]();
+
+}
+
+	function mousedown(event) {
+		pickUpPlug(event.clientX, event.clientY);
+	}
+
+	function mouseup(event) {
+		dropPlug(event.clientX,event.clientY);
+	}
+
+
+	function pickUpPlug(x,y) {
+		for(var i=0; i<holeCoords.length; i++){
+			if (x>(holeCoords[i].x) & 
+				x<(holeCoords[i].x+50) & 
+				y>(holeCoords[i].y) & 
+				y<(holeCoords[i].y+50) & 
+				plugs[i] != -1){
+				//PICK UP PLUG
+				currentPlug = plugs[i];
+				//Updating hole the currentPlug came from to 0
+				plugs[i] = -1;
+				currentHole = i;
+		    	break
+			}
+		}
+		drawlevels[levelCount]();
+	}
+	
+	function dropPlug(x,y) {
+		if (currentPlug != -1) {
+			var plugDropped = false;
+			for(var i=0; i<holeCoords.length; i++){
+				if (x>(holeCoords[i].x) & 
+					x<(holeCoords[i].x+50) & 
+					y>(holeCoords[i].y) & 
+					y<(holeCoords[i].y+50) &
+					plugs[i] == -1){
+					//drop plug in current hole
+					//updating hole with plug
+					plugs[i] = currentPlug;
+					//checking to see if correct plug is being dropped on correct hole
+					if(holeCoords[i].plug == currentPlug){
+						if(winplugs[currentPlug]==0){
+							winCount = winCount +1;
+						}
+						winplugs[currentPlug]=1;
+					}
+					else{ 
+						if(holeCoords[i].plug==-2){
+							//do nothing
+						}
+						else{
+							//updating variable wrongplug if the user puts the incorrect plug in a hole
+							wrongplug = wrongplug+1;
+						}	
+					}
+					currentPlug = -1;
+					currentHole = -1;
+					plugDropped = true;
+					//checking to see if every hole has a plug
+					for(i=plugImages.length; i<plugs.length;i++){
+						if(plugs[i] == -1){
+							win = false;
+							break;
+						}
+						else{
+							if(winCount == (plugs.length-plugImages.length)){
+								wrongplug = 0;
+								
+							}
+							drawlevels[levelCount]();
+							win=true;
+						}
+					}
+					if(win==true){
+						if(wrongplug==0){
+							alert("Well done! You've scored "+ (holenumbers-wrongplug)+ "/"+holenumbers+ " for level " + levelCount + "/15. Click the arrow to proceed.");
+						}
+						else if(wrongplug<=(plugs.length-plugImages.length))
+						{
+							alert("Not quite! You've scored "+(holenumbers-wrongplug)+"/"+holenumbers+" for level " + levelCount + "/15. Click the retry button to attempt the level again.");
+						}
+						else{
+							alert("You've scored 0/"+holenumbers+ " for level " + levelCount + "/15. Click the retry button to attempt the level again, or click the arrow to proceed.");
+							wrongplug=holenumbers;
+						}
+						
+					}
+			    	break
+				}
+			}
+			if (!plugDropped) {
+				// return plug to hole it originally came from
+				plugs[currentHole] = currentPlug;
+				currentPlug = -1;
+				currentHole = -1;
+			}
+			drawlevels[levelCount]();
+	    }
+	}
+
+	function hintButton(event){
+		if(event.clientX>550 & event.clientX<580 & event.clientY>10 & event.clientY<60){
+			//getting hint for that level in hints array
+			alert(hints[(levelCount-1)]);
+		}
+	}
+
+	function retryButton(event){
+		if(event.clientX>630 & event.clientX<665 & event.clientY>10 & event.clientY<60){
+			//if retry button is pressed on scoretable screen, restart from the beginning (level 1)
+			//resetting all counters etc.
+			if(levelCount == (drawlevels.length)-1){
+				levelCount = 1;
+				winCount = 0;
+				counter = 0;
+				sum = 0;
+				plugImages = new Array();
+				setup();
+				//resetting all values in totalscoreArray back to 0
+				for(var i=0; i<totalscoreArray.length;i++){
+					totalscoreArray[i] = 0;
+				}
+			}
+			else{
+				if(win==true){
+					counter=0;
+					setup();
+					winCount=0;
+					totalscoreArray[levelCount] = 0;	
+				}
+				else{
+					setup();
+					winCount=0;
+					totalscoreArray[levelCount] = 0;
+				}
+				
+			}
+
+		}
+	}
+
+	function nextButton(event){
+		if(event.clientX>705 & event.clientX<750 & event.clientY>10 & event.clientY<60)
+		{
+			if(win==true){
+				if(levelCount == drawlevels.length-1){
+					alert("Finished game!");
+					counter=0;
+				}
+				if(levelCount == drawlevels.length-2){
+					totalscoreArray[levelCount] = wrongplug;
+					levelCount = levelCount+1;
+					for(var i=0; i<totalscoreArray.length;i++){
+						sum = sum + totalscoreArray[i];
+					}
+					totalscore = (totalholenumbers)-sum;
+					drawlevels[levelCount]();
+				}
+				else{
+					totalscoreArray[levelCount] = wrongplug;
+					levelCount = levelCount+1;
+					winCount = 0;
+					counter=0;
+					setup();
+					}
+			}
+			else{
+				alert("Not quite... Use the hint button if you need help");
+			}
+		}
+	}
+	function homeButton(event){
+		if(event.clientX>40 & event.clientX<80 & event.clientY>10 & event.clientY<60){
+			var r = window.confirm("Are you sure that you want to return to the homepage? All data will be lost.");
+			if(r==true){
+				levelCount = 0;
+				winCount = 0;
+				counter = 0;
+				totalscore = 0;
+				for(var i=0; i<totalscoreArray.length;i++){
+					totalscoreArray[i] = 0;
+				}
+				sum = 0;
+				plugImages = new Array();
+				setup();
+			}
+			else{
+				//do nothing
+			}
+		}
+	}
+
+initialisedata();
+
+</script>
+</body>
+</html>

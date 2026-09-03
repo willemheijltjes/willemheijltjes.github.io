@@ -1,0 +1,50 @@
+#russellEmotion{
+    position:absolute;
+    top:100px;
+    left:20%;
+    margin-left: -60px;
+    background-image: url('images/leftThoughtBubble.png');
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+#russellFrege{
+    position:relative;
+    left:30%;
+}
+#fregeEmotion{
+    position:absolute;
+    top:100px;
+    left:80%;
+    margin-left: -60px;
+    background-image: url('images/rightThoughtBubble.png');
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#frege{
+    position:absolute;
+    top:50%;
+    left:70%;
+    margin-top: -20vh;
+    margin-left: -10vh;
+    width:20%;
+    height:60%;
+}
+#russell{
+    position:absolute;
+    top:50%;
+    left:30%;
+    margin-top: -20vh;
+    margin-left: -10vh;
+    width:20%;
+    height:45%;
+}
+
+
+.holder{
+    positon: relative;
+    height: 500px;
+    padding-left: 20px;
+}
+
+

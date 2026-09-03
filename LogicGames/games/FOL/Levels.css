@@ -1,0 +1,106 @@
+.holder {
+    background-image: url(images/background3.png);
+    border: 1px solid green ;
+    color: red;
+    z-index: -1;
+    background-size: 100% 100%;
+    margin-left:50px;
+}
+
+#boxA, #boxB {
+    float:left;padding:10px;margin:10px;-moz-user-select:none;
+}
+
+#boxA { background-color: #6633FF; width:75px; height:75px;  }
+#boxB { background-color: #FF6699; width:150px; height:150px; }
+
+.box{
+    float: left;
+    width: 105px;
+    height: 50px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    cursor: move;
+    z-index: 1;
+
+}
+.box1{
+	float: left;
+    width: 105px;
+    height: 50px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    cursor: move;
+    z-index: 1;
+    left:40%;
+}
+.arrowBox{
+	float: left;
+    width: 410px;
+    height: 110px;
+    cursor: move;	
+}	
+
+.topArrowBox{
+	position: relative;
+    top:20%;
+    left:50%;
+    margin-left: -205px;
+	margin-top: -55px;
+	border: none;
+}
+.bottomArrowBox{
+	position: relative;
+    top:80%;
+    left:50%;
+    margin-left: -410px;
+	margin-top: -55px;
+	border: none;
+}
+
+.startArrowBox{
+	float: left;
+    width: 410px;
+    height: 110px;
+    margin: 10px;
+    padding: 10px;
+
+    cursor: move;
+	position: relative;
+
+    background-image: url(images/bottomArrow.png);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}
+#partArrow{
+	position:absolute;
+	height:90px;
+	width:100px;
+	float:left;
+    display: inline-block;
+}
+#russellEmotion{
+    width: 120px;
+    height: 120px;
+    background-image: url('images/leftThoughtBubble.png');
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+#fregeEmotion{
+    width: 120px;
+    height: 120px;
+}
+#bottomArrow{
+    border: 1px solid black;
+    height:100px;
+    width:400px;
+    background-image: url('images/bottomArrow.png');
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+#fregeStuff{
+    position: absolute;
+    top: 75%;
+}

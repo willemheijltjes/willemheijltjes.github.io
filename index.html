@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    <meta name="viewport" content="initial-scale=1">
+
+    <title>Dr Willem Heijltjes - University of Bath</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/starter-template.css" rel="stylesheet" type="text/css">
+    <link href="css/scrolling-nav.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+  <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header page-scroll">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#page-top">Dr Willem Heijltjes</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+            <li class="hidden"> <a href="#page-top"></a></li>
+            <li class="page-scroll"><a href="#research">Research</a></li>
+		        <li class="page-scroll"><a href="#slides">Slides</a></li>
+            <li class="page-scroll"><a href="#students">Students</a></li>
+            <li class="page-scroll"><a href="#misc">Misc</a></li>
+            <li class="page-scroll"><a href="#cv">About</a></li>
+            <li class="page-scroll"><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    <div class="container" id="about">
+      <div class="starter-template">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h1>Dr Willem Heijltjes</h1>
+            <p class="lead">
+              I'm a Senior Lecturer and Prize Fellow in the Mathematical Foundations
+              group, Department of Computer Science, University of Bath.</p>
+            <p class="lead">
+              My research is in the area of structural proof theory, where I investigate
+              the fundamental structure of proofs and their application as type systems.
+              I have worked on canonical graphical representations of proof
+              (commonly known as proof nets),
+              on computational interpretations of deep-inference proof theory, and
+              on typed calculi for computational effects and imperative programming.</p>
+          </div>
+
+          <div class="col-md-5">
+	          <br>
+            <img class="featurette-image img-responsive"
+                 src="images/willem-portrait-small.jpg"
+                 alt="Willem Heijltjes">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <div class="container" id="research">
+      <div class="starter-template">
+
+        <h1>Research</h1>
+
+        <hr class="featurette-divider">
+
+        <h2>Projects</h2>
+
+          <div class="row featurette">
+            <div class="col-md-8">
+              <h3 class="featurette-heading">
+                Typed Lambda-Calculi with Sharing and Unsharing
+              </h3>
+              <h4 class="featurette-heading"><span class="text-muted">
+                EPSRC project EP/R029121/1 | January 2019 - July 2022
+              </span></h4>
+              <p class="lead">
+                In this project we investigate the computational potential of deep-inference proof theory, via the
+                Curry-Howard correspondence between intuitionistic logic and simple types for the lambda-calculus.
+              </p>
+              <p class="lead"><a href="Unsharing/index.html">
+                Project page</a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                class="featurette-image img-responsive"
+                src="images/image_unsharing.png"
+                alt="unsharing image"
+                width="300px">
+            </div>
+          </div>
+
+        <hr class="featurette-divider">
+
+        <div style="height:50px"></div>
+
+        <h2>Publications</h2>
+
+        <hr class="featurette-divider" id="FMC2025">
+
+          <div class="row featurette">
+            <div class="col-md-8">
+              <h3 class="featurette-heading">
+                The Functional Machine Calculus III: Control
+              </h3>
+              <h3 class="featurette-heading"><span class="text-muted">
+                Willem Heijltjes
+              </span></h3>
+              <h4 class="featurette-heading"><span class="text-muted">
+                MFPS 2025
+              </span></h4>
+              <p class="lead">
+                The FMC is extended with constructs for control flow to embed a complete imperative language including
+                constants, conditionals, case switches, exception handling, and iteration (loops), in addition to the
+                higher-order store, input-output, and probabilistic choice captured previously. The key features of the
+                lambda-calculus again carry over: a confluent reduction semantics and a system of simple types that
+                (in the absence of iteration) guarantees machine termination and strong normalization.
+              </p>
+              <p class="lead"><a href="pdf/2025-FMC-III.pdf">
+                PDF</a>
+                | <a href="https://doi.org/10.46298/entics.16682">
+                DOI: 10.46298/entics.16682</a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                class="featurette-image img-responsive"
+                src="images/image_FMCIII.png"
+                alt="image from paper"
+                width="300px">
+            </div>
+          </div>
+
+        <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-8">
+              <h3 class="featurette-heading">
+                Quantitative Types for the Functional Machine Calculus
+              </h3>
+              <h3 class="featurette-heading"><span class="text-muted">
+                Willem Heijltjes
+              </span></h3>
+              <h4 class="featurette-heading"><span class="text-muted">
+                FSCD 2025
+              </span></h4>
+              <p class="lead">
+                The simple types for the FMC are generalised to quantitative types
+                (or non-idempotentent intersection types), in two variants, weak and strong.
+                Weak typing coincides with machine termination and spine normalization, and
+                strong typing with strong normalization and a notion of perpetual evaluation.
+                The results apply immediately to the effects (store, IO, probabilistic choice)
+                and strategies (CBV, monads, CBPV) encoded in the FMC.
+              </p>
+              <p class="lead"><a href="pdf/2025-QFMC.pdf">
+                Extended version</a>
+                | <a href="https://doi.org/10.4230/LIPIcs.FSCD.2025.24">
+                DOI: 10.4230/LIPIcs.FSCD.2025.24</a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                class="featurette-image img-responsive"
+                src="images/image_QFMC.png"
+                alt="image from paper"
+                width="300px">
+            </div>
+          </div>
+
+        <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-8">
+              <h3 class="featurette-heading">
+                Simple types for probabilistic termination
+              </h3>
+              <h3 class="featurette-heading"><span class="text-muted">
+                Willem Heijltjes and Georgina Majury
+              </span></h3>
+              <h4 class="featurette-heading"><span class="text-muted">
+                CSL 2025
+              </span></h4>
+              <p class="lead">
+                We present a system of simple types to give lower bounds on the probability
+                of termination of probabilistic lambda-terms. The intuition is to take simple
+                types and view the base type as signifying successful termination. Our type
+                system then replaces base types with probabilities (rationals between zero and one).
+              </p>
+              <p class="lead"><a href="pdf/2025-STPT.pdf">
+                PDF</a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                class="featurette-image img-responsive"
+                src="images/image_SPTP.png"
+                alt="image from paper"
+                width="300px">
+            </div>
+          </div>
+
+        <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-8">
+              <h3 class="featurette-heading">
+                The Relational Machine Calculus
+              </h3>
+              <h3 class="featurette-heading"><span class="text-muted">
+                Chris Barrett, Daniel Castle, and Willem Heijltjes
+              </span></h3>
+              <h4 class="featurette-heading"><span class="text-muted">
+                LICS 2024
+              </span></h4>
+              <p class="lead">
+                We extend the first-order Functional Machine Calculus, a language for
+                Cartesian categories, to a model of relational computation. The Relational
+                Machine Calculus (RMC) introduces non-determinism, iteration, and unification,
+                making it a Kleene algebra that operates as a stack calculus with perfect duality
+                between <i>push</i> and <i>pop</i>. The RMC naturally embeds various first-order
+                models of computation, including automata, Turing machines, Petri nets,
+                interaction nets, and logic programming.
+              </p>
+              <p class="lead"><a href="pdf/2024-RMC.pdf">
+                PDF</a>
+                | <a href="http://arxiv.org/abs/2405.10801">
+                arXiv:2405.10801</a>
+                | <a href="https://dl.acm.org/doi/abs/10.1145/3661814.3662091">
+                DOI: 10.1145/3661814.3662091</a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                class="featurette-image img-responsive"
+                src="images/image_RMC.png"
+                alt="image from paper"
+                width="300px">
+            </div>
+          </div>
+
+          <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-8">
+              <h3 class="featurette-heading">
+                The Functional Machine Calculus II: Semantics
+              </h3>
+              <h3 class="featurette-heading"><span class="text-muted">
+                Chris Barrett, Willem Heijltjes, and Guy McCusker
+              </span></h3>
+              <h4 class="featurette-heading"><span class="text-muted">
+                CSL 2023
+              </span></h4>
+              <p class="lead">
+                We investigate the semantics of the Functional Machine Calculus, introduced in
+                the paper below. We give a domain-theoretic account of the untyped calculus, and
+                for the typed calculus a Gandy-style proof of strong normalization and a
+                categorical account as a Cartesian closed category.
+              </p>
+              <p class="lead"><a href="pdf/2023-FMC-II.pdf">
+                PDF</a>
+                | <a href="http://arxiv.org/abs/2211.13140">
+                arXiv:2211.13140</a>
+                | <a href="https://doi.org/10.4230/LIPIcs.CSL.2023.10">
+                DOI: 10.4230/LIPIcs.CSL.2023.10</a>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img
+                class="featurette-image img-responsive"
+                src="images/image_FMCII.png"
+                alt="image from paper"
+                width="300px">
+            </div>
+          </div>
+
+        <hr class="featurette-divider" id="FMC2022">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              The Functional Machine Calculus
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              MFPS 2022
+            </span></h4>
+            <p class="lead">
+              The Functional Machine Calculus (FMC) is a new model of effectful functional computation. Viewing the
+              lambda-calculus as an instruction language for a simple stack machine in the style of Krivine, it is
+              extended firstly with multiple stacks, to model the effects of state, I/O, probabilities, and
+              non-determinism; and secondly with sequential composition, to model strategies including
+              call&ndash;by&ndash;name, call&ndash;by&ndash;value, and call&ndash;by&ndash;push&ndash;value.
+            </p>
+            <p class="lead"><a href="pdf/2022-FMC.pdf">
+              PDF</a>
+              | <a href="https://arxiv.org/abs/2212.08177">
+              arXiv:2212.08177</a>
+              | <a href="https://doi.org/10.46298/entics.10513">
+              DOI: 10.46298/entics.10513</a>
+              | <a href="https://www.youtube.com/watch?v=-dCYR_VE_NE">
+              Talk (HOPE'21)</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_FMC.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Normalization Without Syntax
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes, Dominic Hughes, and Lutz Stra&szlig;burger
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              FSCD 2022
+            </span></h4>
+            <p class="lead">
+              We present a simple method for normalization of intuitionistic combinatorial proofs.
+              Rather than including a cut construct inside the calculus, or computing the result
+              directly by combinatorial manipulation, we build a tree with combinatorial proofs
+              as nodes and cuts as edges. Normalization may then follow the standard reduction
+              rules of the sequent calculus, but in a setting that is free of permutations.
+            </p>
+            <p class="lead"><a href="pdf/2022-NWS.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.4230/LIPIcs.FSCD.2022.19">
+              DOI: 10.4230/LIPIcs.FSCD.2022.19</a>
+              | <a href="videos/Normalization_Without_Syntax.mp4">
+              Talk </a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_nws.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider" id="DQTS2021">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              A deep quantitative type system
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Giulio Guerrieri, Willem Heijltjes, and Joe Paulus
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              CSL 2021
+            </span></h4>
+            <p class="lead">
+              We investigate intersection types and resource lambda-calculi from
+              the perspective of deep-inference proof theory. We give a single
+              underlying type system that is <i>parameterized</i> in a choice of
+              algebraic laws to represent different flavours of quantitative
+              reasoning about lambda-calculi.
+            </p>
+            <p class="lead"><a href="pdf/2021-guerrieri-heijltjes-paulus.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.4230/LIPIcs.CSL.2021.24">
+              DOI: 10.4230/LIPIcs.CSL.2021.24</a>
+              | <a href="https://www.youtube.com/watch?v=0WJualwlPzc&t=4547s">
+              Talk</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_dqts.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Decomposing probabilistic lambda-calculi
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Ugo Dal Lago, Giulio Guerrieri, and Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              FoSSaCS 2020
+            </span></h4>
+            <p class="lead">
+              Probabilistic lambda-calculi are generally non-confluent, with
+              call-by-name and call-by-value providing different results. Via a
+              decomposition of the usual probabilistic sum into a <i>generator</i>
+              that generates a probabilistic event and a <i>choice</i> that
+              evaluates differently depending on a given event, we capture both
+              reduction regimes, as well as many intermediate ones, in a single,
+              confluent probabilistic lambda-calculus.
+            </p>
+            <p class="lead"><a href="pdf/2020-dallago-guerrieri-heijltjes.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1007/978-3-030-45231-5_8">
+              DOI: 10.1007/978-3-030-45231-5_8</a>
+              | <a href="https://arxiv.org/abs/2002.08392">
+              Long version</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_dplc.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Spinal atomic lambda-calculus
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              David Sherratt, Willem Heijltjes, Tom Gundersen, and Michel Parigot
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              FoSSaCS 2020
+            </span></h4>
+            <p class="lead">
+              We investigate the computational side of the <i>switch</i> rule of
+              deep-inference proof theory, and link it to <i>end-of-scope</i>
+              operators and <i>director strings</i> in lambda-calculus. We use
+              this to extend the atomic lambda-calculus, obtaining a more refined
+              version of full laziness, <i>spine duplication</i>.
+            </p>
+            <p class="lead"><a href="pdf/2020-sherratt-heijltjes-gundersen-parigot.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1007/978-3-030-45231-5_30">
+              DOI: 10.1007/978-3-030-45231-5_30</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_salc.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Proof nets for first-order additive linear logic
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes, Dominic Hughes, and Lutz Stra&szlig;burger
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              FSCD 2019
+            </span></h4>
+            <p class="lead">
+              We give two flavours of proof nets for additive linear logic with
+              first-order quantification: one where existential witnesses are
+              recorded via explicit substitutions, attached to axiom links; and
+              one where witness information is omitted, and reconstructed by
+              unification.
+            </p>
+            <p class="lead"><a href="pdf/2019-heijltjes-hughes-strassburger-FSCD.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.4230/LIPIcs.FSCD.2019.22">
+              DOI: 10.4230/LIPIcs.FSCD.2019.22</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_all1.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Intuitionistic proofs without syntax
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes, Dominic Hughes, and Lutz Stra&szlig;burger
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              LICS 2019
+            </span></h4>
+            <p class="lead">
+              We extend Hughes's classical Combinatorial Proofs to intuitionistic
+              logic. We obtain a purely geometric, concrete semantics that has
+              <i>polynomial full completeness</i> (no size explosion when
+              translating from sequent calculus) and <i>local canonicity</i> (all
+              non-duplicating permutations are factored out).
+            </p>
+            <p class="lead"><a href="pdf/2019-heijltjes-hughes-strassburger-LICS.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1109/LICS.2019.8785827">
+              DOI: 10.1109/LICS.2019.8785827</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_ipws.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Proof nets for bi-intuitionistic linear logic
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Gianluigi Bellin and Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              FSCD 2018
+            </span></h4>
+            <p class="lead">
+              Bi-intuitionistic linear logic (BILL) combines the tensor and linear
+              implication of intuitionistic linear logic (ILL) with their duals,
+              <i>par</i> and <i>subtraction</i>, relating tensor and par through a
+              linear distributivity. We give canonical proof nets for this
+              proof-theoretically challenging logic, with correctness through both
+              contractibility and switching.
+            </p>
+            <p class="lead"><a href="pdf/2018-bellin-heijltjes.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.4230/LIPIcs.FSCD.2018.10">
+              DOI: 10.4230/LIPIcs.FSCD.2018.10</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_bill.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Conflict nets: Efficient locally canonical MALL proof nets
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Dominic Hughes and Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              LICS 2016
+            </span></h4>
+            <p class="lead">
+              We give a new notion of proof net for Multiplicative-Additive
+              Linear Logic, that strikes a subtle balance between efficiency and
+              canonicity. Conflict nets are canonical for all <i>local</i> rule
+              commutations, which are those that do not incur a global
+              duplication. As a consequence they have linear size compared to
+              sequent proofs, avoiding the exponential growth of Hughes and Van
+              Glabbeek's Slice Nets.
+            </p>
+            <p class="lead"><a href="pdf/2016-hughes-heijltjes.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1145/2933575.2934559">
+              DOI: 10.1145/2933575.2934559</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_conflict.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider" id="MLL2016">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Proof equivalence in MLL is PSPACE-complete
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes and Robin Houston
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Logical Methods in Computer Science 12(1) 2016
+            </span></h4>
+            <p class="lead">
+              Proof equivalence in MLL with units is shown to be
+              PSPACE-complete, by a reduction from the graphical formalism
+              called Non-Deterministic Constraint Logic. This effectively rules
+              out a satisfactory notion of proof net with units, as such a
+              notion would constitute a tractable decision algorithm for proof
+              equivalence.
+            </p>
+            <p class="lead"><a href="pdf/2016-heijltjes-houston.pdf">
+              PDF</a>
+              | <a href="http://arxiv.org/abs/1510.06178">
+              arXiv</a>
+              | <a href="http://doi.org/10.2168/LMCS-12(1:2)2016">
+              DOI: 10.2168/LMCS-12(1:2)2016</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_mll2.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Proof nets and semi-star-autonomous categories
+           </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes and Lutz Stra&szlig;burger
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Mathematical Structures in Computer Science 26(5):789-828 (2016)
+            </span></h4>
+            <p class="lead">
+              We consider a notion of semi-star-autonomous category: star-autonomous
+              categories without units, corresponding to Girard's proof nets for MLL.
+              (Available online since November 2014.)
+            </p>
+            <p class="lead"><a href="pdf/2016-heijltjes-strassburger.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1017/S0960129514000395">
+              DOI: 10.1017/S0960129514000395</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_ssa.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Complexity bounds for sum-product logic
+              <br>via additive proof nets and Petri nets
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes and Dominic Hughes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              LICS 2015
+            </span></h4>
+            <p class="lead">
+              We give an effective correctness criterion for additive proof nets,
+              which is naturally expressed in Petri nets, and is the equivalent of
+              Danos contractibility for MLL. In addition we give simple proof search
+              algorithms for additive linear logic with and without units and an
+              effective correctness algorithm for additive proof nets with units,
+              and we show that first-order additive linear logic is NP-complete.
+            </p>
+            <p class="lead"><a href="pdf/2015-heijltjes-hughes.pdf">
+              PDF</a>
+              | <a href"http://doi.org/10.1109/LICS.2015.18">
+              DOI: 10.1109/LICS.2015.18</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_grid.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              No proof nets for MLL with units:
+              <br>Proof equivalence in MLL is PSPACE-complete
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes and Robin Houston
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              CSL-LICS 2014
+            </span></h4>
+            <p class="lead">
+              Proof equivalence in MLL with units is shown to be PSPACE-complete, by a
+              reduction from the graphical formalism called Non-Deterministic
+              Constraint Logic. This effectively rules out a satisfactory notion of
+              proof net with units, as such a notion would constitute a tractable
+              decision algorithm for proof equivalence.
+              (Superseded by the journal version
+              <a href="#MLL2016">Proof equivalence in MLL is PSPACE-complete</a>.)
+            </p>
+            <p class="lead"><a href="pdf/2014-heijltjes-houston.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1145/2603088.2603126">
+              DOI: 10.1145/2603088.2603126</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_mll.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              A Proof of Strong Normalisation for the Typed Atomic Lambda-Calculus
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Tom Gundersen, Willem Heijltjes, and Michel Parigot
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              LPAR 2013
+            </span></h4>
+            <p class="lead">
+              The atomic lambda-calculus is a typeable lambda-calculus with explicit
+              sharing, which originates in a Curry-Howard interpretation of a
+              deep-inference system for intuitionistic logic. In this paper we prove
+              strong normalization of the typed atomic lambda-calculus using Tait's
+              reducibility method.
+            </p>
+            <p class="lead"><a href="pdf/2013-gundersen-heijltjes-parigot-LPAR.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1007/978-3-642-45221-5_24">
+              DOI: 10.1007/978-3-642-45221-5_24</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_lpar.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider" id="ALC2013">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Atomic lambda-calculus:
+              <br> a typed lambda-calculus with explicit sharing
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Tom Gundersen, Willem Heijltjes, and Michel Parigot
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              LICS 2013
+            </span></h4>
+            <p class="lead">
+              The atomic lambda-calculus is a typeable lambda-calculus with explicit
+              sharing, based on a Curry-Howard-style interpretation of the deep
+              inference proof formalism. Duplication of subterms during reduction
+              proceeds <i>atomically</i>, i.e. on individual constructors, similar to
+              optimal graph reduction in the style of Lamping. The calculus preserves
+              strong normalisation and achieves fully lazy sharing.
+            </p>
+            <p class="lead"><a href="pdf/2013-gundersen-heijltjes-parigot-LICS.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1109/LICS.2013.37">
+              DOI: 10.1109/LICS.2013.37</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_alc.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Proof nets for additive linear logic with units
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              LICS 2011
+            </span></h4>
+            <p class="lead">
+              The paper describes canonical proof nets for additive linear logic, or
+              sum-product logic, the internal language of categories with free finite
+              products and co-products. Starting from existing proof nets, which
+              disregard the unit laws, canonical nets are obtained by a simple
+              rewriting algorithm, for which a substantial correctness proof is
+              provided.
+            </p>
+            <p class="lead">
+              Awarded the
+                <a href="https://lics.siglog.org/archive/kleene-award.html">
+              LICS 2011 Kleene award</a>
+              for best student paper
+            </p>
+            <p class="lead"><a href="pdf/2011-heijltjes.pdf">
+              PDF</a>
+              | <a href="http://doi.org/10.1109/LICS.2011.9">
+              DOI: 10.1109/LICS.2011.9</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_all.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider" id="CPF2010">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <!--a name="cpf"></a-->
+            <h3 class="featurette-heading">
+              Classical Proof Forestry
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Annals of Pure and Applied Logic 161 (11), pp. 1346-1366, 2010
+            </span></h4>
+            <p class="lead">
+              The paper investigates cut-elimination in classical proof forests, a
+              proof formalism for first-order classical logic based on Herbrand's
+              Theorem and backtracking games in the style of Coquand. Cut-free
+              classical proof forests were described by Miller, and are called
+              Expansion Tree Proofs.
+            </p>
+            <p class="lead"><a href="pdf/2010-heijltjes.pdf">
+              Preprint</a>
+              | <a href="http://doi.org/10.1016/j.apal.2010.04.006">
+              DOI: 10.1016/j.apal.2010.04.006</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_cpf.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+      <!--/div>
+    </div-->
+
+    <div style="height:50px"></div>
+
+    <!--div class="container">
+      <div class="starter-template"-->
+
+        <h2>Workshop papers</h2>
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              The Functional Machine Calculus III: Choice
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Mathematical Foundations of Programming Semantics (MFPS) 2024
+            </span></h4>
+            <p class="lead">
+              Superseded by <a href="#FMC2025">
+              The Functional Machine Calculus III: Control (MFPS 2025)</a>.
+            </p>
+            <p class="lead">
+              <a href="pdf/2024-FMC-Choice.pdf">PDF</a> |
+              <a href="https://arxiv.org/abs/2411.04615">arXiv:2411.04615</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_FMC3.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              The Functional Machine Calculus
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Higher-Order Programming with Effecs (HOPE) 2021
+            </span></h4>
+            <p class="lead">
+              Superseded by <a href="#FMC2022">
+              The Functional Machine Calculus (MFPS 2022)</a>.
+            </p>
+            <p class="lead">
+              <a href="pdf/2021-FMC-HOPE.pdf">PDF</a> |
+              <a href="https://www.youtube.com/watch?v=-dCYR_VE_NE">Talk</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_FMC.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Deep-Inference Intersection Types
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Joe Paulus and Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Twenty Years of Deep Inference (TYDI) 2018
+            </span></h4>
+            <p class="lead">
+              Superseded by <a href="#DQTS2021">
+              A deep quantitative type system</a>.
+            </p>
+            <p class="lead">
+              <a href="pdf/2018-paulus-heijltjes.pdf">
+              PDF</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_diit.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Un Lambda-Calcul Atomique
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Tom Gundersen, Willem Heijltjes et Michel Parigot
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Journées Francophones des Langages Applicatifs (JFLA) 2013
+            </span></h4>
+            <p class="lead">
+              Superseded by <a href="#ALC2013">
+              Atomic lambda-calculus:
+              a typed lambda-calculus with explicit sharing</a>.
+            </p>
+            <p class="lead">
+              <a href="pdf/2013-gundersen-heijltjes-parigot-JFLA-FR.pdf">
+              Français</a>
+              | <a href="pdf/2013-gundersen-heijltjes-parigot-JFLA-EN.pdf">
+              English</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_alc.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Proof Forests with Cut Based on Herbrand's Theorem
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Willem Heijltjes
+            </span></h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              Classical Logic & Computation (CL&C) 2008
+            </span></h4>
+            <p class="lead">
+              Superseded by <a href="#CPF2010">
+              Classical Proof Forestry</a>.
+            </p>
+            <p class="lead"><a href="pdf/2008-heijltjes.pdf">
+              PDF</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_cpf.png"
+              alt="image from paper"
+              width="300px">
+          </div>
+        </div>
+        <hr class="featurette-divider">
+
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <div class="container" id="slides">
+      <div class="starter-template">
+
+        <h1>Slides</h1>
+
+        <hr class="featurette-divider">
+
+        <h3 class="featurette-heading"><a href="pdf/slides-2025-MFPS.pdf">
+          The Functional Machine Calculus III: Control (MFPS, Glasgow, 2025)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2025-FSCD.pdf">
+          Quantitative types for the FMC (FSCD, Birmingham, 2025)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2023-CIE.pdf">
+          Willem's Adventures in Curry-Howard Land (CiE, Batumi, 2023)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2021-ESSLLI">
+          From Proof Nets to Combinatorial Proofs (ESSLLI, Utrecht, 2021)</a>
+          | <a href=https://www.lix.polytechnique.fr/~lutz/orgs/ESSLLI2021-course.html>Course website</a>
+        </h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2021-FMC.pdf">
+          The Functional Machine Calculus (TLLA, Rome, 2021)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2021-DQTS.pdf">
+          A deep quantitative type system (CSL, Ljubljana, 2021)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2020-DPLC.pdf">
+          Decomposing probabilistic lambda-calculi (Bath, 2020)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2019-IPWS.pdf">
+          Intuitionistic proofs without syntax (Bath, 2019)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2018-BILL.pdf">
+          Proof nets for bi-intuitionistic linear logic (FSCD, Oxford, 2018)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2018-TYDI.pdf">
+          An introduction to deep inference (TYDI, Oxford, 2018)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2016-MALL.pdf">
+          On MALL proof nets (LL2016, Lyon)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2015-ALL.pdf">
+          Complexity bounds for sum-product logic (LICS, Kyoto, 2015)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2014-MLL.pdf">
+          MLL proof equivalence (CSL-LICS, Vienna, 2014)</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2013-ALC.pdf">
+          Atomic lambda-calculus</a></h3>
+        <h3 class="featurette-heading">
+          Proof nets for additive linear logic <a href="pdf/slides-2011-ALL-1.pdf">
+          part 1</a>, <a href="pdf/slides-2011-ALL-2.pdf">
+          part 2</a></h3>
+        <h3 class="featurette-heading"><a href="pdf/slides-2010-CPF.pdf">
+          Classical proof forestry</a></h3>
+
+        <hr class="featurette-divider">
+
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <div class="container" id="students">
+      <div class="starter-template">
+
+        <h1>Students</h1>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Daniel Castle
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              PhD
+            </span></h4>
+            <p class="lead"><a href="https://uk.linkedin.com/in/dcastle-cs">
+              LinkedIn</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Cameron Allett
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              PhD
+            </span></h4>
+            <p class="lead"><a href="https://people.bath.ac.uk/ca821/">
+              Homepage</a>
+            </p>
+          </div>
+        </div>
+
+       <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Georgi Majury
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              PhD | Successfully defended March 2025
+            </span></h4>
+            <p class="lead">
+              Doctoral thesis: <a href="pdf/thesis-2022-Majury.pdf">
+              Type Systems for Probabilistic lambda-Calculi
+              </a>
+            <p class="lead"><a href="https://people.bath.ac.uk/gvrm20/">
+              Homepage</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Chris Barrett
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              PhD | Successfully defended December 2022
+            </span></h4>
+            <p class="lead">
+              Doctoral thesis: <a href="pdf/2022-Barrett-PHD.pdf">
+              On the Simply-Typed Functional Machine Calculus:
+              Categorical Semantics and Strong Normalisation
+              </a>
+            </p>
+            <p class="lead"><a href="https://chrisbarrett2.github.io/">
+              Homepage</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              David Sherratt
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              PhD | Successfully defended May 2019
+            </span></h4>
+            <p class="lead">
+              Doctoral thesis: <a href="pdf/2019-sherratt-PHD.pdf">
+              A lambda-calculus that achieves full laziness with spine duplication</a>
+            </p>
+            <p class="lead"><a href="https://www.fmi.uni-jena.de/fakult%C3%A4t/institute+und+abteilungen/institut+f%C3%BCr+informatik/theoretische+informatik+i/team/dr_+david+sherratt">
+              Homepage</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Dr Fanny He
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              PhD | Successfully defended April 2018
+            </span></h4>
+            <p class="lead">
+              Doctoral thesis: <a href="pdf/2018-he-PHD.pdf">
+              The Atomic Lambda-Mu Calculus</a>
+            </p>
+            <p class="lead"><a href="http://fh341.github.io/">
+              Homepage</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <div class="container" id="misc">
+      <div class="starter-template">
+
+        <h1>Miscellaneous</h1>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Logic Games
+            </h3>
+            <p class="lead">
+              A collection of educational computer games for logic in computer science, made by final-year undergraduate
+              students.
+            </p>
+            <p class="lead"><a href="LogicGames">
+              Logic Games</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_logicgames.png"
+              alt="logic games"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Open Deduction LaTeX macros
+            </h3>
+            <p class="lead">
+              A LaTeX package for drawing derivations in open deduction.
+            </p>
+            <p class="lead"><a href="pdf/opendeduction.sty">
+              opendeduction.sty</a>
+              | <a href="pdf/od-manual.pdf">
+              Manual</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_od.png"
+              alt="a derivation"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Paper plane
+            </h3>
+            <p class="lead">
+              Folding instructions for a good-looking and reasonably-flying paper airplane.
+            </p>
+            <p class="lead"><a href="pdf/paperplane.pdf">
+              PDF</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_paperplane.png"
+              alt="paper plane folding instructions"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <div class="container" id="cv">
+      <div class="starter-template">
+
+        <h1>About: Willem Heijltjes</h1>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Senior Lecturer
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              December 2019 - present
+            </span></h4>
+            <h3 class="featurette-heading">
+              Lecturer
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              November 2014 - November 2019
+            </span></h4>
+            <h3 class="featurette-heading">
+              Prize Fellow
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              November 2012 - October 2014
+            </span></h4>
+            <p class="lead"><a href="http://www.bath.ac.uk/comp-sci">
+              Department of Computer Science</a><br>
+              University of Bath
+            </p>
+          </div>
+        </div>
+
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              Postdoctoral researcher
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              October 2011 - October 2012
+            </span></h4>
+            <p class="lead">
+              Team Parsifal | <a href="http://www.lix.polytechnique.fr/">
+              LIX</a>
+              | École Polytechnique
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3 class="featurette-heading">
+              PhD in Theoretical Computer Science
+            </h3>
+            <h4 class="featurette-heading"><span class="text-muted">
+              November 2011 (viva), June 2012 (graduation)
+            </span></h4>
+            <p class="lead"><a href="http://wcms.inf.ed.ac.uk/lfcs/">
+              Laboratory for the Foundations of Computer Science (LFCS)</a></br>
+              School of Informatics | University of Edinburgh
+            </p>
+            <p class="lead">
+              Doctoral thesis: <a href="pdf/2012-heijltjes-PHD.pdf">
+              Graphical Representation of Canonical Proof: Two case studies
+            </a></p>
+            <p class="lead">
+              Thesis advisor: <a href="https://www.fmf.uni-lj.si/si/imenik/32646/">
+              Professor Alex Simpson</a>
+            </p>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Master of Science in Cognitive Artificial Intelligence
+            </h3>
+            <h4><span class="text-muted">
+              March 2007
+            </span></h4>
+            <p class="lead">
+              Department of Philosophy | Utrecht University
+            </p>
+            <p class="lead">
+              Master's thesis: <a href="pdf/2007-heijltjes-MSc.pdf">
+              Graph Rewriting for Natural Deduction and the Proper Treatment of Variables</a>
+            </p>
+            <p class="lead">
+              Winner of the Cognitive Artificial Intelligence thesis award 2007,
+              Department of Philosophy, Utrecht University
+            </p>
+            <p class="lead">
+              Thesis advisors: <a href="https://www.uu.nl/medewerkers/AVisser">
+              Professor Albert Visser</a>
+              and <a href="http://cl-informatik.uibk.ac.at/users/vincent/">
+              Professor Vincent van Oostrom</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_variablerights.jpg"
+              alt="variable rights image"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <div class="container" id="contact">
+      <div class="starter-template">
+
+        <h1>Contact</h1>
+
+        <hr class="featurette-divider">
+
+        <div class="row-featurette">
+          <div class="col-md-8">
+            <p class="lead">
+              Department of Computer Science</br>
+              1 West 4.67</br>
+              Claverton Down</br>
+              Bath</br>
+              BA2 7AY</br>
+              United Kingdom</br>
+              <a href="mailto:&#119;&#046;&#098;&#046;&#104;&#101;&#105;&#106;&#108;&#116;&#106;&#101;&#115;&#064;&#098;&#097;&#116;&#104;&#046;&#097;&#099;&#046;&#117;&#107;">
+              w.b.heijltjes@bath.ac.uk</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_stopsubs.jpg"
+              alt="stop substitution image"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+      </div>
+    </div>
+
+    <div style="height:50px"></div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/scrolling-nav.js"></script>
+
+    <!-- Start of StatCounter Code for Default Guide -->
+    <script type="text/javascript">
+      var sc_project=3955857;
+      var sc_invisible=1;
+      var sc_security="ae45caaf";
+    </script>
+    <script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+    <noscript>
+      <div class="statcounter">
+	<a title="website statistics" href="http://statcounter.com/free-web-stats/" target="_blank">
+	  <img class="statcounter" src="http://c.statcounter.com/3955857/0/ae45caaf/1/" alt="website statistics">
+	</a>
+      </div>
+    </noscript>
+
+    <!-- End of StatCounter Code for Default Guide -->
+
+  </body>
+</html>

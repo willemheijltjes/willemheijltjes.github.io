@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    <meta name="viewport" content="initial-scale=1">
+
+    <title>Typed Lambda-Calculi with Sharing and Unsharing</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/starter-template.css" rel="stylesheet" type="text/css">
+    <link href="css/scrolling-nav.css" rel="stylesheet" type="text/css">
+
+  </head>
+
+  <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#page-top">Typed Lambda-Calculi with Sharing and Unsharing</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+            <li class="hidden">
+              <a href="#page-top"></a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    <div class="container">
+      <div class="starter-template">
+
+        <h1>Typed Lambda-Calculi with Sharing and Unsharing</h1>
+        <h3 class="text-muted">EPSRC Project EP/R029121/1<h3>
+        <h4 class="text-muted">January 2019 - July 2022</h4>
+        <br>
+        <div class="row featurette">
+          <div class="col-md-8">
+            <p style="margin-left:auto;margin-right:auto;width:60%">
+            <img class="featurette-image img-responsive"
+                 src="images/image_medials.png"
+                 alt="proof transformations with medial rules"
+                 width=600px>
+            </p>
+          </div>
+        </div>
+
+        <h2>Project description</h2>
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <br>
+            <p class="lead">
+              This project aims to develop a new approach to efficient evaluation in the lambda-calculus, based on
+              deep-inference proof theory.
+            </p><p class="lead">
+              The lambda-calculus is a minimal but fully expressive, theoretical programming language. It forms the basis
+              of functional programming languages such as Haskell, and efficiency improvements in the lambda-calculus can
+              be applied to create compilers that produce faster programs. Such improvements can be efficient computation
+              strategies, or changes to the syntax, or both.
+            </p><p class="lead">
+              The lambda-calculus is linked to proof theory by the Curry-Howard correspondence: types are logical formulas,
+              programs are proofs, and computation is proof normalization (reduction to a well-behaved form). Conversely,
+              for a given proof system we can ask what its computational interpretation is.
+            </p><p class="lead">
+              Deep inference is a modern branch of proof theory characterized by its flexibility in composing proofs. This
+              allows it to capture logics not expressible in other proof systems, and to yield surprisingly good complexity
+              results. Key to these results is the medial rule scheme, a core innovation of deep inference that sets it
+              apart from related formalisms. The basis of the project is the discovery that the medial enables computation
+              steps associated with optimal efficiency.
+            </p><p class="lead">
+              Sharing graphs are a graphical formalism for lambda-calculus computation using sharing and unsharing. Sharing
+              is the multiple use of a single expression, which then needs to be evaluated only once, improving efficiency.
+              Unsharing is a counterpart that enables the shared use of partial expressions. In theory, sharing graphs are
+              optimally efficient for lambda-calculus. However, in a real-world setting, the control mechanism that manages
+              duplication, the oracle, incurs too much overhead cost, and they are not used in practice.
+            </p><p class="lead">
+              The discovery on which the project is based is that the medial rule scheme enables computation with sharing
+              and unsharing, as in sharing graphs, but without the need for a control mechanism other than the structure of
+              the proof itself.
+            </p><p class="lead">
+              The project will develop a computational interpretation of the medial. An initial investigation led to the
+              atomic lambda-calculus, the first typed lambda-calculus with sharing and unsharing, and the first
+              lambda-calculus to capture full laziness, a standard notion of efficiency, as a natural strategy. The project
+              will build on this on three levels: structure, control, and measurement.
+            </p><p class="lead">
+              Structure: The project will develop a theory of proof normalization in deep inference for intuitionistic
+              logic (associated with the lambda-calculus), where the medial replaces the need for a control mechanism.
+              Based on the experience with the atomic lambda-calculus, the hypothesis is that the proof system adapts
+              naturally to different levels of efficiency by varying the choice of proof rules.
+            </p><p class="lead">
+              Control: New control mechanisms will be derived from the structure of deep inference proofs. These will be
+              used to implement various efficient strategies with sharing and unsharing in typed lambda-calculi and
+              abstract machines.
+            </p><p class="lead">
+              Measurement: The project will use normalization in deep inference to construct a range of semantic tools to
+              measure the efficiency of these calculi and control mechanisms. Here, the availability of a single underlying
+              proof system provides a new and unique opportunity to compare strategies on an equal footing.
+            </p><p class="lead">
+              On the theoretical side, the project addresses several open questions in the literature: How to measure the
+              efficiency of lambda-calculi with sharing? What is a global type system for sharing graphs? What is the
+              computational meaning of deep inference? On the practical side, the typed lambda-calculi and abstract
+              machines of the project are a basis for new and efficient ways of implementing functional programming
+              languages.
+            </p>
+        </div>
+      </div>
+
+<!-- PEOPLE -->
+
+        <hr class="featurette-divider">
+
+        <br>
+
+        <h2>People</h2>
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Willem Heijltjes
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Principal Investigator
+            </span></h3>
+            <p class="lead">
+            </p>
+            <p class="lead">
+              <a href="http://willem.heijltj.es">
+              Personal page</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_willem.jpg"
+              alt="Willem"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Giulio Guerrieri
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Research Associate
+            </span></h3>
+            <p class="lead">
+              <a href="http://www.irif.fr/~giuliog/">
+              Personal page</a>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_giulio.jpg"
+              alt="Giulio Guerrieri"
+              width="300px">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              Vincent van Oostrom
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              Research Associate
+            </span></h3>
+            <!-- <p class="lead">
+              <a href="http://www.irif.fr/~giuliog/">
+              Personal page</a>
+            </p> -->
+          </div>
+          <div class="col-md-4">
+            <img
+              class="featurette-image img-responsive"
+              src="images/image_vincent.png"
+              alt="Vincent van Oostrom (vroeger)"
+              width="300px">
+          </div>
+        </div>
+<!-- Workshop -->
+
+        <hr class="featurette-divider">
+
+        <br>
+
+        <h2>Workshop</h2>
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <h3 class="featurette-heading">
+              NIETS
+            </h3>
+            <h3 class="featurette-heading"><span class="text-muted">
+              New Ideas in Effects, Types, and Sharing | Bath, 14-16 June 2022
+            </span></h3>
+            <p class="lead">
+              <a href="http://willem.heijltj.es/NIETS">
+              Workshop page</a>
+            </p>
+          </div>
+        </div>
+
+
+
+<!-- PUBLICATIONS -->
+
+        <hr class="featurette-divider">
+
+        <div style="height:50px"></div>
+
+        <h2>Publications</h2>
+
+
+        <div class="row featurette">
+          <div class="col-md-12">
+            <h3><p>
+              The Functional Machine Calculus II: Semantics
+            </p></h3><h4><p class="text-muted">
+              Chris Barrett, Willem Heijltjes, and Guy McCusker | CSL 2023 |
+            <a href="pdf/2023-FMC-II.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              The Functional Machine Calculus
+            </p></h3><h4><p class="text-muted">
+              Willem Heijltjes | MFPS 2023 |
+            <a href="pdf/2022-FMC.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Normalization Without Syntax
+            </p></h3><h4><p class="text-muted">
+              Willem Heijltjes, Dominic Hughes, and Lutz Strassburger | FSCD 2023 |
+            <a href="pdf/2022-NWS.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              A deep quantitative type system
+            </p></h3><h4><p class="text-muted">
+              Giulio Guerrieri, Willem Heijltjes, and Joe Paulus | CSL 2021 |
+            <a href="pdf/2021-guerrieri-heijltjes-paulus.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Categorifying non-idempotent intersection types
+            </p></h3><h4><p class="text-muted">
+              Giulio Guerrieri and Federico Olimpieri | CSL 2021 |
+            <a href="pdf/2021-guerrieri-olimpieri.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Factorize factorization
+            </p></h3><h4><p class="text-muted">
+              Beniamino Accattoli, Claudia Faggian, and Giulio Guerrieri | CSL 2021 |
+            <a href="pdf/2021-accattoli-faggian-guerrieri.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Decomposing probabilistic lambda-calculi
+            </p></h3><h4><p class="text-muted">
+              Ugo Dal Lago, Giulio Guerrieri, and Willem Heijltjes | FoSSaCS 2020 |
+            <a href="pdf/2020-dallago-guerrieri-heijltjes.pdf">
+              PDF
+            </a> | <a href="https://arxiv.org/abs/2002.08392">
+              Long version
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Spinal atomic lambda-calculus
+            </p></h3><h4><p class="text-muted">
+              David Sherratt, Willem Heijltjes, Tom Gundersen, and Michel Parigot | FoSSaCS 2020 |
+            <a href="pdf/2020-sherratt-heijltjes-gundersen-parigot.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Glueability of resource proof-structures: inverting the Taylor expansion
+            </p></h3><h4><p class="text-muted">
+              Giulio Guerrieri, Luc Pellissier, and Lorenzo Tortora de Falco | CSL 2020 |
+            <a href="pdf/2020-guerrieri-pelissier-tortora.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Abstract Machines for Open Call-by-Value
+            </p></h3><h4><p class="text-muted">
+              Beniamino Accattoli and Giulio Guerrieri |
+              Science of Computer Programming | 2019 |
+            <a href="pdf/2019-accattoli-guerrieri.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Factorization and normalization, essentially
+            </p></h3><h4><p class="text-muted">
+              Beniamino Accattoli, Claudia Faggian, and Giulio Guerrieri | APLAS 2019 |
+            <a href="pdf/2019-accattoli-faggian-guerrieri.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Crumbling abstract machines
+            </p></h3><h4><p class="text-muted">
+              Beniamino Accattoli, Andrea Condoluci, Giulio Guerrieri, and Claudio Sacerdoti Coen | PPDP 2019 |
+            <a href="pdf/2019-accattoli-condoluci-guerrieri-coen.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+          <div class="col-md-12">
+            <h3><p>
+              Types by need
+            </p></h3><h4><p class="text-muted">
+              Beniamino Accattoli, Giulio Guerrieri, and Mario Leberle | ESOP 2019 |
+            <a href="pdf/2019-accattoli-guerrieri-leberle.pdf">
+              PDF
+            </a></p></h4>
+          </div>
+        </div>
+
+
+ <!-- LINKS -->
+
+        <hr class="featurette-divider">
+
+        <br>
+
+        <h2>Links</h2>
+
+        <div class="row featurette">
+          <div class="col-md-8">
+            <p class="lead">
+              <ul class="lead">
+                <li><a href="http://alessio.guglielmi.name/res/cos">Deep Inference webpages</li>
+                <li><a href="http://gow.epsrc.ukri.org/NGBOViewGrant.aspx?GrantRef=EP/R029121/1">EPSRC grant EP/R029121/1</a>
+                </li>
+              </ul>
+            </p>
+          </div>
+        </div>
+
+<!-- END -->
+
+      </div>
+    </div>
+
+
+
+
+<div style="height:50px"></div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/scrolling-nav.js"></script>
+
+  </body>
+</html>

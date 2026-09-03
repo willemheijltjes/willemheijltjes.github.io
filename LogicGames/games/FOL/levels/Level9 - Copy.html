@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js" type="text/javascript"></script>
+
+    <script src="../FOL.js" type="text/javascript"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../2Item.css" media="screen">
+    <script src="..\shared.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../Levels.css" media="screen">
+    <title>Level 9</title>
+    <style>
+        #fregeStuff{
+            left: 70%;
+            top:40%;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(window).load(function(){
+            $('#level1Modal').modal('show');
+        });
+
+
+        let context = [];
+        let sentence1 = {type:"predicate", formula:"Has", args:["Frege","Pencil"]};
+        let sentence2={type:"predicate", formula:"Has", args:["Frege","Pen"]};
+        let sentence3={type:"binary", formula:"OR", pred1:sentence1, pred2:sentence2};
+
+        let sentences = [sentence3];
+        let counter=0;
+        let russellEmotion;
+        let fregeStuff;
+        function makeContext(){
+            context = [];
+            let russellEmotion, fregeEmotion, russellFrege, fregeRussell;
+            if (document.getElementById("russellEmotion")) {
+                let russellEmotionBox = document.getElementById("russellEmotion").firstElementChild;
+
+                russellEmotion = russellEmotionBox ? russellEmotionBox.className : false;
+                console.log(russellEmotion);
+            }
+
+            if (document.getElementById("fregeEmotion")) {
+                let fregeEmotionBox = document.getElementById("fregeEmotion").firstElementChild;
+                fregeEmotion = fregeEmotionBox ? fregeEmotionBox.className : false;
+            }
+
+
+            if (document.getElementById("russellFrege")) {
+                let russellFregeBox = document.getElementById("russellFrege").firstElementChild;
+                russellFrege = russellFregeBox ? russellFregeBox.className : false;
+            }
+
+            if(document.getElementById("fregeRussell")){
+                let fregeRussellBox = document.getElementById("fregeRussell").firstElementChild;
+                fregeRussell = fregeRussellBox ? fregeRussellBox.className : false;
+            }
+
+            if (russellEmotion){
+                context.push(russellEmotion+"(Frege )");
+            }
+            if(fregeEmotion){
+                context.push(fregeEmotion+"(Frege )");
+            }
+
+            let fregeStuffBox = document.getElementById("fregeStuff").firstElementChild;
+            fregeStuff = fregeStuffBox ? fregeStuffBox.className : false;
+
+            if(russellFrege){
+                if (russellFrege=="Has" && fregeStuff){
+                    if(document.getElementById("arrowBox").firstElementChild){
+                        context.push("Has(Frege "+fregeStuff+" )");
+                    }
+
+                }
+            }
+            let output = true;
+
+            $( sentences ).each(function() {
+                let sentence=$(this)[0];
+                if (!eval(context, sentence)){
+                    output = false;
+                }
+            });
+            if(output){
+                triggerNextLevelDialogue();
+            }
+            else{
+                triggerTryAgainDialogue();
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div class="modal fade" id="doubleHelp" tabindex="-1" role="dialog" aria-labelledby="singleHelp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Help</h4>
+            </div>
+            <div class="modal-body">
+                <p>Drag the arrow by clicking the box in the middle</p>
+                <img src="../images/help2.png" width="50%" height="50%" style="border: 1pt solid black">
+                <p>You will see a green outline when it is in the right place.</p>
+                <img src="../images/help3.png" width="50%" height="50%" style="border: 1pt solid black">
+                <p>Remember that if you make a mistake, you can delete things by double clicking them.</p>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="level1Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Frege can write his theory with a pen or a pencil.
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="nextLevelDialogue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Correct(you)!</h4>
+            </div>
+            
+            <div class="modal-footer">
+                <a href="Level10.html" class="btn btn-primary">Go to next level</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="tryAgainDialogue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Bad luck!</h4>
+            </div>
+            <div class="modal-body">
+                <p>You haven't got every sentence true yet.</p>
+                <p>Drag the pen or the pencil to the box on the right and then use the has() relation.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Try again.</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class = "container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <h2>Has(Frege, Frege's Pen) &#8744 Has(Frege, Frege's Pencil)</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+            <div class="holder">
+                <img src="../images/frege.png" id="russell" width="250" height="300">
+                <div class="box receiverBox" id="russellEmotion" ondrop="drop(event)" ondragover="allowDrop(event)"  data-toggle="tooltip" data-placement="left" title="Frege's thoughts"></div>
+                <div class="box receiverBox arrowBox topArrowBox" width="400" height="200" ondrop="dropArrow(event)" ondragover="allowDrop(event)" ondragenter="addBorder(event)" ondragleave="removeBorder(event)" id="arrowBox"></div>
+
+                <div class="box receiverBox" id="fregeStuff" ondrop="drop(event)" ondragover="allowDrop(event)"  data-toggle="tooltip" data-placement="left" title="Frege's belongings"></div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"> </div>
+        <div class="col-md-9" style="margin-left:50px">
+            <div class="sentences">
+                <button class="btn btn-success" id="contextMaker" onclick="makeContext()">Check</button>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#level1Modal">Instructions</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#doubleHelp">Help</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-1">
+
+        </div>
+        <div class="col-xs-3">
+            <div class="box startBox" id="startEmotion" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img class="Happy" src="../images/smiley.png" draggable="true" ondragstart="drag(event)" id="Happy" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Happy()">
+            </div>
+            <div class="box startBox" id="startLogician" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img class="Logician" src="../images/logic.png" draggable="true" ondragstart="drag(event)" id="Logician" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Logician()">
+            </div>
+
+        </div>
+        <div class="col-xs-3">
+            <div class="box startBox" id="hasStart" ondrop="dropB(event)" ondragover="allowDrop(event)">
+                <img class="Has" src="../images/has.png" draggable="true" ondragstart="drag(event)" id="Has" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Has()">
+            </div>
+            <div class="box startBox" id="lightningStart" ondrop="dropB(event)" ondragover="allowDrop(event)">
+                <img class="IsAngryWith" src="../images/lightning.png" draggable="true" ondragstart="drag(event)" id="IsAngryWith" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="IsAngryWith()">
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="box startBox" id="startPen" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img class="Pen" src="../images/pen.png" draggable="true" ondragstart="drag(event)" id="Pen" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Pen">
+            </div>
+            <div class="box startBox" id="startPencil" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img class="Pencil" src="../images/pencil.png" draggable="true" ondragstart="drag(event)" id="Pencil" width="88" height="31" data-toggle="tooltip" data-placement="bottom" title="Pencil">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-4">
+            <div class="startArrowBox" id="startArrowBox" draggable="true" ondragstart="drag(event)" id="topArrow" width="500" height="100" >
+
+                <div class="topArrow">
+                    <div class="box1 receiverBox" id="russellFrege" ondrop="dropB(event)" ondragover="allowDrop(event)" data-toggle="tooltip" data-placement="top" title="Russell's feelings towards Frege">
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

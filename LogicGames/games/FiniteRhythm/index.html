@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Finite Rhythm</title>
+        <link rel="shortcut icon" href="TemplateData/favicon.png">
+        <link rel="stylesheet" href="TemplateData/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+        <script src="TemplateData/UnityProgress.js"></script>
+        <script src="TemplateData/AutoplayCheck.js"></script>
+        <script src="Build/UnityLoader.js"></script>
+        <script>
+            const gameInstance = UnityLoader.instantiate("gameContainer", "Build/Finite Rhythm.json", {
+                onProgress: UnityProgress,
+                Module: {
+                    preInit: [AutoplayCheck.disableAutorunIfNecessary],
+                    onRuntimeInitialized: AutoplayCheck.onRuntimeLoaded}
+                }
+            );
+            AutoplayCheck.gameInstance = gameInstance;
+        </script>
+    </head>
+    <body>
+        <div class="webgl-content">
+                <div id="gameContainer" style="width: 960px; height: 600px"></div>
+        <div class="footer">
+            <div class="fullscreen disabled"></div>
+            <div class="title">Finite Rhythm</div>
+        </div>
+        </div>
+    </body>
+</html>

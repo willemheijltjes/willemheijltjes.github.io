@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="author" content="Freya Johnson">
+	
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+
+    <link rel="icon" href="images/icon.png">
+
+    <title>FINITE AUTOMATA GAME</title>
+
+    <!-- link to CSS -->
+    <link href="myTemplate.css" rel="stylesheet">
+
+  </head>
+
+  <body>	
+	
+	<div class="container">
+
+		<div class="myTemplate">
+			<h1>Finite Automata Game</h1>
+			<p class="lead">Learn how finite automata and regular expressions are connected.</p>
+		</div>
+		
+		<img width=100 height=100 src="images/icon.png" style="display: block; margin: 0 auto;">
+		
+		
+		<div class="panel panel-info" style="margin:0 auto; width:550px;">
+			<div class="panel-heading" style="color:white; background-color:#5a8c81;">
+				<h3 class="panel-title" style="text-align: center;">PLAYING THE GAME</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;">
+				The aim of the game is to make your way through levels of increasing difficulty by creating a diagram (Finite Automata) to represent the target (Regular Expression) given in each level.
+			</div>
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		<p style="text-align:center;"><b>Scroll down for a quick tutorial on how to play!</b></p>
+		<br>
+		<br><br>
+	  
+		<div style="width:1000px; margin:0 auto;">
+			
+			
+			<div style="float:left;">
+				<div class="toolbar">
+					<div style="float:left; width:240px;height:60px;border:1px solid #000; background-color:#ffffff;text-align:center;line-height:55px;">
+					<img id="statesBut" width=55 height=55 src="images/states.png">
+					<img id="arrowBut" width=55 height=55 src="images/arrowDis.png">
+					<img id="binBut" width=55 height=55 src="images/binDis.png">
+					<img id="clearBut" width=55 height=55 src="images/clearDis.png">
+					</div>
+					<div id="levelText" class="levelText" style="width:500; color:grey;">LEVEL 4</div>
+					<button id="nextBut" onclick="nextBut()" style="color:black; font-weight: bold; font-size: 20px; border-color: black; border-style: solid; border-width: 2px; position:absolute; right:25px; bottom:15px; width:90px; height:40px; background-color:#FFA500">Next</button>
+				</div>
+				<canvas id="canvas" width="700" height="500" style="border:1px solid #c3c3c3;float:left;">
+				Your browser does not support the HTML5 canvas tag.
+				</canvas>
+				
+			</div>
+	  
+			<div class="sideBar" style="color:grey">
+				<h3 id="targetTitle" style="color:grey;">TARGET</h3>
+				<div id="targetRect" class="targetRect" style="color:grey; height:50px; display:inline-block; width: auto; font-size: 30px;">ab*a</div>
+				<h3 id="guideTitle" style="color:grey;">Guide words</h3>
+				<div id="guideRect" class="guideRect" style="color:grey; height:90px; width:200px; font-size:15px">
+					aa
+					<br>
+					aba
+					<br>
+					abba
+					<br>
+					abbba
+				</div>
+				<br>-------------
+				<br>
+				<br>
+				<button id="doneBut" class="doneBut" style="width:170px; background-color:#cddcd9">Submit my finite automaton</button>
+				
+				<br>
+				<br>
+				
+			</div>
+		</div>
+		
+    </div>
+	
+	
+	
+	<div style="padding-top: 30px; padding-bottom: 15px; text-align: center;">
+		Created by Freya Johnson <br>
+		freya02@hotmail.co.uk <br>
+		2016
+	</div>
+	
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap-ie10-viewport-bug-workaround.js"></script>
+	
+	<!-- Script which controls everything!! -->
+	<script src="intro.js"></script>
+	
+  </body>
+</html>
